@@ -34,11 +34,6 @@ router.get('/LoginReg', function(req, res, next) {
     res.render('LoginReg')
 })
 
-/* GET Designer Kurti  page. */
-router.get('/DesignerKurti', function(req, res, next) {
-    res.render('DesignerKurti')
-})
-
 /* GET Kids Wear page. */
 
 /* GET Saree page. */
@@ -46,14 +41,8 @@ router.get('/Saree', function(req, res, next) {
     res.render('Saree')
 })
 
-/* GET Gown page. */
-router.get('/Gown', function(req, res, next) {
-    res.render('Gown')
-})
-
-/* GET BridalLehengaCholi page. */
-router.get('/BridalLehengaCholi', function(req, res, next) {
-    res.render('BridalLehengaCholi')
+router.get('/PalazzoKurti', function(req, res, next) {
+    res.render('PalazzoKurti')
 })
 
 /* GET Combo wear page. */
@@ -64,11 +53,6 @@ router.get('/ComboWear', function(req, res, next) {
 /* GET Palazzo Kurti  page. */
 router.get('/PalazzoKurti', function(req, res, next) {
     res.render('PalazzoKurti')
-})
-
-/* GET Designer Chex print Chaniyacholi  page. */
-router.get('/ChexChaniyaCholi', function(req, res, next) {
-    res.render('ChexChaniyaCholi')
 })
 
 /* GET Designer Blouse  page. */
@@ -187,4 +171,68 @@ router.get('/DeLehengaCholi', function(req, res, next) {
     )
 })
 
+router.get('/BridalLehengaCholi', function(req, res, next) {
+    Prod.find({
+            Category_Name: 'Lehenga Choli(Bridal Lehenga Choli)'
+        },
+        function(err, data) {
+            console.log(data)
+            res.render('BridalLehengaCholi', {
+                BridalLehengaCholi: data
+            })
+        }
+    )
+})
+
+router.get('/Gown', function(req, res, next) {
+    Prod.find({
+            Category_Name: 'Gown'
+        },
+        function(err, data) {
+            console.log(data)
+            res.render('Gown', {
+                Gown: data
+            })
+        }
+    )
+})
+
+router.get('/DesignerKurti', function(req, res, next) {
+    Prod.find({
+            Category_Name: 'Kurti(Designer Kurti)'
+        },
+        function(err, data) {
+            console.log(data)
+            res.render('DesignerKurti', {
+                DesignerKurti: data
+            })
+        }
+    )
+})
+
+router.get('/ChexChaniyaCholi', function(req, res, next) {
+    Prod.find({
+            Category_Name: 'Chex Print Chaniya Choli'
+        },
+        function(err, data) {
+            console.log(data)
+            res.render('ChexChaniyaCholi', {
+                ChexChaniyaCholi: data
+            })
+        }
+    )
+})
+
+router.get('/Saree', function(req, res, next) {
+    Prod.find({
+            Category_Name: 'Chex Print Chaniya Choli'
+        },
+        function(err, data) {
+            console.log(data)
+            res.render('ChexChaniyaCholi', {
+                ChexChaniyaCholi: data
+            })
+        }
+    )
+})
 module.exports = router
