@@ -5,6 +5,8 @@ var Cont = require('../models/ContactUs.models.js')
 var Nw = require('../models/NewsletterSubscription.models.js')
 var Prod = require('../models/Peoduct.models.js')
 
+var AddTo = require('../models/AddToCart.models.js')
+
 var multer = require('multer')
 var storage = multer.diskStorage({
     destination: './public/images/upload',
@@ -25,40 +27,17 @@ router.get('/', function(req, res, next) {
     })
 })
 
-/* GET home page. */
-router.get('/Home', function(req, res, next) {
-        res.render('Home')
-    })
-    /* GET Login Register page. */
+/* GET Login Register page. */
 router.get('/LoginReg', function(req, res, next) {
     res.render('LoginReg')
 })
 
 /* GET Kids Wear page. */
 
-/* GET Saree page. */
-router.get('/Saree', function(req, res, next) {
-    res.render('Saree')
-})
 
-router.get('/PalazzoKurti', function(req, res, next) {
-    res.render('PalazzoKurti')
-})
 
-/* GET Combo wear page. */
-router.get('/ComboWear', function(req, res, next) {
-    res.render('ComboWear')
-})
 
-/* GET Palazzo Kurti  page. */
-router.get('/PalazzoKurti', function(req, res, next) {
-    res.render('PalazzoKurti')
-})
 
-/* GET Designer Blouse  page. */
-router.get('/DesignerBlouse', function(req, res, next) {
-    res.render('DesignerBlouse')
-})
 
 /* GET About Us  page. */
 router.get('/AboutUs', function(req, res, next) {
@@ -142,6 +121,73 @@ router.post('/Product', upload.any(), function(req, res, next) {
         .catch(() => {
             console.log('error')
         })
+})
+
+
+
+
+
+
+router.get('/ComboWear', function(req, res, next) {
+    Prod.find({
+            Category_Name: 'Combo Wear'
+        },
+        function(err, data) {
+            console.log(data)
+            res.render('ComboWear', {
+                ComboWear: data
+            })
+        }
+    )
+})
+
+
+
+
+router.get('/Saree', function(req, res, next) {
+    Prod.find({
+            Category_Name: 'Saree'
+        },
+        function(err, data) {
+            console.log(data)
+            res.render('Saree', {
+                Saree: data
+            })
+        }
+    )
+})
+
+
+
+router.get('/DesignerBlouse', function(req, res, next) {
+    Prod.find({
+            Category_Name: 'Designer Blouse'
+        },
+        function(err, data) {
+            console.log(data)
+            res.render('DesignerBlouse', {
+                DesignerBlouse: data
+            })
+        }
+    )
+})
+
+
+
+
+
+
+router.get('/PalazzoKurti', function(req, res, next) {
+    Prod.find({
+            Category_Name: 'Kurti(Palazzo Kurti)'
+        },
+        function(err, data) {
+            console.log(data)
+            res.render('PalazzoKurti', {
+                PalazzoKurti: data
+            })
+        }
+    )
 })
 
 /** show all records */
@@ -235,4 +281,74 @@ router.get('/Saree', function(req, res, next) {
         }
     )
 })
+
+router.get('/Home', function(req, res, next) {
+    Prod.find({}, function(err, data) {
+        console.log(data)
+        res.render('Home', {
+            Home: data
+        })
+    }).limit(10)
+})
+
+router.get('/ShowFullDetails/:id', function(req, res) {
+    console.log(req.params.id)
+    Prod.findById(req.params.id, function(err, user) {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(user)
+
+            res.render('Product', {
+                Product: user
+            })
+            res.end()
+        }
+    })
+})
+
+router.post('/ShowFullDetails/:id', function(req, res) {
+    Prod.findById(req.params.id, req.body, function(err) {
+        if (err) {
+            res.redirect('ShowFullDetails/' + req.params.id)
+        } else {
+            res.redirect('/Cart')
+        }
+    })
+})
+
+
+
+
+
+
+
+
+
+
+
+router.post('/Cart', function(req, res, next) {
+
+    const st = new AddTo({
+        id: 0,
+        Product_Name: req.body.Product_Name,
+        QTY: req.body.QTY,
+        Price: req.body.Price,
+        Image: req.body.Image,
+
+
+    });
+    st.save().then(() => {
+        console.log("insert success");
+        res.redirect('/Cart');
+
+    }).catch(() => {
+        console.log("error");
+    });
+});
+
+
+
+
+
 module.exports = router
