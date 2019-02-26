@@ -5,7 +5,8 @@ const AddTo = mongoose.Schema({
     Product_Name: String,
     QTY: Number,
     Price: Number,
-    Image: String
+    Image: String,
+    user_id: String
 }, {
     timespace: true,
 });

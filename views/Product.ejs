@@ -1,25 +1,27 @@
 <% include partials/header %>
 
-<!-- Content section -->	
-<section class="main">
-			
-				
+    <!-- Content section -->
+    <section class="main">
 
-<!-- Product content -->
-<section class="product">
 
-    <!-- Product info -->
-    <section class="product-info">
-        <div class="container">
-            <div class="row">
 
-                <div class="col-sm-4">
-                    <div class="product-images">
-                        <div class="box">
-                            <div class="primary">
-                                <img src="http://localhost:3000/images/upload/<%= Product.Image %>"  alt="Chaser Overalls" />
-                            </div>
-            <!--
+        <!-- Product content -->
+        <section class="product">
+
+            <!-- Product info -->
+            <section class="product-info">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-sm-4">
+                            <div class="product-images">
+                                <div class="box">
+                                    <div class="primary">
+                                        <img src="http://localhost:3000/images/upload/<%=
+                                            Product.Image %>" alt="Chaser
+                                        Overalls" />
+                                    </div>
+                                    <!--
                             <div class="thumbs" id="gallery">
                                 <ul class="thumbs-list">
                                     <li>
@@ -40,7 +42,7 @@
                                 </ul>
                             </div>
 !-->
-                       <!--     <div class="social">
+                                    <!--     <div class="social">
                                 <div id="sharrre">
                                     <div class="facebook"> </div>
                                     <div class="twitter"> </div>
@@ -48,64 +50,72 @@
                                 </div>
                             </div>
                             !-->
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-sm-8">
-                    
-                    <!-- Product content -->
-                    <div class="product-content">
-                        <div class="box">
+                        <div class="col-sm-8">
 
-                            <!-- Tab panels' navigation -->
-                            <ul class="nav nav-tabs">
-                                <li class="active">
-                                    <a href="#product" data-toggle="tab">
-                                        <i class="fa fa-reorder fa-lg"></i>
-                                        <span class="hidden-xs">Product</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#description" data-toggle="tab">
-                                        <i class="fa fa-info-circle fa-lg"></i>
-                                        <span class="hidden-xs">Info</span>
-                                    </a>
-                                </li>
+                            <!-- Product content -->
+                            <div class="product-content">
+                                <div class="box">
 
-                               
+                                    <!-- Tab panels' navigation -->
+                                    <ul class="nav nav-tabs">
+                                        <li class="active">
+                                            <a href="#product" data-toggle="tab">
+                                                <i class="fa fa-reorder fa-lg"></i>
+                                                <span class="hidden-xs">Product</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#description" data-toggle="tab">
+                                                <i class="fa fa-info-circle
+                                                    fa-lg"></i>
+                                                <span class="hidden-xs">Info</span>
+                                            </a>
+                                        </li>
 
-                               
 
-                            </ul>
-                            <!-- End Tab panels' navigation -->
-                            
 
-                            <!-- Tab panels container -->
-                            
-                            <div class="tab-content">
-                                
-                                <!-- Product tab -->
-                                <div class="tab-pane active" id="product">
-                                    <form enctype="multipart/form-data" action="/Cart"  method="post">
-                                        
-                                        <div class="details">
-                                            <h1><%= Product.Product_Name%></h1>
-                                            <div class="prices"><span class="price"><%= Product.Price%></span></div>
 
-                                        
-                                        </div>   
 
-                                        <div class="short-description">
-                                            <p><%= Product.Description%></p>
-                                        </div>
-                                        
+                                    </ul>
+                                    <!-- End Tab panels' navigation -->
 
-                                        <div class="short-description">
-                                        <p><%= Product.Color_Name%></p>
-                                    </div>
-                                    
-                                      <!-- <div class="options">
+
+                                    <!-- Tab panels container -->
+
+                                    <div class="tab-content">
+
+                                        <!-- Product tab -->
+                                        <div class="tab-pane active" id="product">
+                                            <form action="/Cart" method="post">
+                                                <div class="details">
+                                                    <h1>
+                                                        <%=
+                                                            Product.Product_Name%>
+                                                    </h1>
+                                                    <div class="prices"><span class="price"><%=
+                                                                    Product.Price%></span></div>
+                                                </div>
+
+                                                <div class="short-description">
+                                                    <p>
+                                                        <%=
+                                                                    Product.Description%>
+                                                    </p>
+                                                </div>
+
+
+                                                <div class="short-description">
+                                                    <p>
+                                                        <%=
+                                                                        Product.Color_Name%>
+                                                    </p>
+                                                </div>
+
+                                                <!-- <div class="options">
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
@@ -121,377 +131,409 @@
                                                 </div>
                                             </div>
                                         </div> !-->
-
-                                        <div class="add-to-cart">
-                                            <button class="btn btn-primary btn-lg btn-block-xs" data-toggle="modal" data-target="#added">
-                                                <i class="fa fa-plus"></i> &nbsp; Add to cart
-                                            </button>
+                                                <input type="hidden" name="id" value="<%=
+                                                                    Product.id%>">
+                                                <div class="add-to-cart">
+                                                    <button class="btn
+                                                                        btn-primary
+                                                                        btn-lg
+                                                                        btn-block-xs" data-toggle="modal" data-target="#added">
+                                                                        <i
+                                                                            class="fa
+                                                                            fa-plus"></i>
+                                                                        &nbsp;
+                                                                        Add to
+                                                                        cart
+                                                                    </button>
+                                                </div>
+                                            </form>
                                         </div>
-                                    </form>						
+                                        <!-- End id="product" -->
+                                        <!-- Description tab -->
+                                        <div class="tab-pane" id="description">
+                                            <p><span><%=
+                                                                        Product.Description
+                                                                        %></span><br /><br />
+                                                <span>100%
+                                                                        Polyester</span>
+                                            </p>
+                                        </div>
+                                        <!-- End id="description" -->
+                                        <!-- End id="ratings" -->
+                                    </div>
+                                    <!-- End tab panels container -->
                                 </div>
-                                <!-- End id="product" -->
-                                
-                                <!-- Description tab -->
-                                <div class="tab-pane" id="description">
-                                    <p><span><%= Product.Description %></span><br /><br />
-                                        <span>100% Polyester</span>
-                                    </p>						
-                                </div>
-                                <!-- End id="description" -->
 
-                               
-
-                             
-
-                                
-                                <!-- End id="ratings" -->
-                                
-                                
-                            </div>                                            
-                            <!-- End tab panels container -->
-                            
+                            </div>
+                            <!-- End class="product-content" -->
                         </div>
-                        
-                    </div>                                    
-                    <!-- End class="product-content" -->
-                    
-                </div>
 
 
-            </div>
-        </div>
-    </section>
-    <!-- End class="product-info" -->
-
-    <!-- Product Reviews -->
-    <section class="product-reviews">
-        <div class="container">
-            <div class="col-sm-8 col-sm-offset-2">
-                <h5>Tell us why you <span class="script">love&#10084;</span> this product</h5>
-
-                <!-- Facebook comments -->
-                <div id="fb-root"></div>
-                <script>                            
-                    (function(d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0];
-                        if (d.getElementById(id))
-                            return;
-                        js = d.createElement(s);
-                        js.id = id;
-                        js.src = "../connect.facebook.net/en_GB/all.js#xfbml=1&appId=460821237293986";
-                        fjs.parentNode.insertBefore(js, fjs);
-                    }(document, 'script', 'facebook-jssdk'));
-                </script>
-
-                <div class="fb-comments" data-width="730" data-href="http://la-boutique.twindots.com/product/chaser-overalls" data-num-posts="10"></div>
-                <!-- End Facebook comments -->
-                
-            </div>
-        </div>		
-    </section>
-    <!-- End class="product-reviews" -->
-    
-    <!-- Related products -->
-    <section class="product-related">
-        <div class="container">
-            <div class="col-sm-12">
-
-                <h5>Can't find what you're looking for? Why not try these&hellip;</h5>
-
-                <ul class="product-list isotope">
-                    <li class="standard" data-price="160">
-                        <a href="product.html" title="1300 in Grey">
-
-                            <div class="image">
-                                <img class="primary" src="img/thumbnails/db_file_img_48_640xauto.jpg" alt="Lisette Dress" />
-                                <img class="secondary" src="img/thumbnails/db_file_img_49_640xauto.jpg" alt="Lisette Dress" />
-
-                            </div>
-
-                            <div class="title">
-                                <div class="prices"><span class="price">£160.00</span></div>
-                                <h3>1300 in Grey</h3>
-
-                            </div>
-
-                        </a>
-                    </li>
-                    <li class="standard" data-price="75">
-                        <a href="product.html" title="574 In Navy">
-
-                            <div class="image">
-                                <img class="primary" src="img/thumbnails/db_file_img_32_640xauto.jpg" alt="El Silencio" />
-                                <img class="secondary" src="img/thumbnails/db_file_img_33_640xauto.jpg" alt="El Silencio" />
-
-                            </div>
-
-                            <div class="title">
-                                <div class="prices"><span class="price">£75.00</span></div>
-                                <h3>574 In Navy</h3>
-
-                            </div>
-
-                        </a>
-                    </li>
-                    <li class="standard" data-price="70">
-                        <a href="product.html" title="574 In Red">
-
-                            <div class="image">
-                                <img class="primary" src="img/thumbnails/db_file_img_137_640xauto.jpg" alt="" />
-                                <img class="secondary" src="img/thumbnails/db_file_img_138_640xauto.jpg" alt="" />
-
-                            </div>
-
-                            <div class="title">
-                                <div class="prices"><span class="price">£70.00</span></div>
-                                <h3>574 In Red</h3>
-
-                            </div>
-
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>	
-    </section>                    
-    <!-- End class="products-related" -->
-
-    <!-- Added to cart modal window -->
-    <div id="added" class="modal fade" tabindex="-1">
-    	<div class="modal-dialog">
-    	    <div class="modal-content">
-		        <div class="modal-header">
-		            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		            <div class="hgroup title">
-		                <h3>You're one step closer to owning this product!</h3>
-		                <h5>"Chaser Overalls" has been added to your cart</h5>
-		            </div>
-		        </div>
-		        <div class="modal-footer">	
-	                <a href="cart.html" class="btn btn-primary btn-sm btn-block-xs">
-	                    Go to cart &nbsp; <i class="fa fa-chevron-right"></i>
-	                </a>
-		        </div>
-			</div>
-		</div>
-    </div>
-    <!-- End id="added" -->
-
-</section>
-<!-- End class="product-info" -->
-			
-			</section>
-			<!-- End class="main" -->
-
-
-<!-- Footer -->
-<div class="footer">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-sm-2">
-							<!-- Support -->
-							<div class="support">
-									<h6>Support</h6>
-
-									<ul class="links">
-											<li>
-													<a href="AboutUs" title="About us" class="title">About us</a>
-											</li>
-											<li>
-													<a href="about-us.html" title="About us" class="title">FAQ</a>
-											</li>
-											<li>
-													<a href="about-us.html" title="About us" class="title">Contact Us</a>
-											</li>
-									</ul>
-							</div>
-							<!-- End class="support" -->
-
-                <hr />
-
-                <!-- My account -->
-                <div class="account">
-                    <h6>My account</h6>
-
-                    <ul class="links">
-                        <li>
-                            <a href="login-register.html" title="Login / Register">Login / Register</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- End class="account"-->
-
-            </div>
-
-            <div class="col-sm-2">
-
-							<!-- Categories -->
-							<div class="categories">
-									<h6>Shop</h6>
-
-									<ul class="links">
-											<li>
-													<a href="DeLehengaCholi" title="Women">Lehenga Choli</a>
-                                            </li>
-                                            <li>
-													<a href="DeLehengaCholi" title="Women">Lehenga Choli</a>
-											</li>
-											<li>
-													<a href="DesignerKurti" title="Men">Kurti</a>
-                                            </li>
-                                            <li>
-													<a href="PalazzoKurti" title="Men">Palazzo Kurti</a>
-											</li>
-											<li>
-													<a href="ChexChaniyaCholi" title="Girls">Chex Print Chaniya Choli</a>
-											</li>
-											<li>
-													<a href="DesignerBlouse" title="Boys">Designer Blouse</a>
-											</li>
-											<li>
-													<a href="KidsWear" title="Boys">Kids Wear</a>
-											</li>
-											<li>
-													<a href="Saree" title="Boys">Saree</a>
-											</li>
-											<li>
-													<a href="Gown" title="Boys">Gown</a>
-											</li>
-									</ul>
-							</div>
-							<!-- End class="categories" -->
-
-
-                <hr />
-            </div>
-            <div class="col-sm-4">
-
-                <!-- Newsletter subscription -->
-                <div class="newsletter">
-                    <h6>Newsletter subscription</h6>
-
-                    <form action="/NewsletterSubscription" method="post">
-
-                    <div class="input-group">
-                        <input type="text" name="Email_ID" class="form-control" />
-                        <input type="submit" value="Send" class="btn btn-primary" />
                     </div>
-                
-                </form>
-
-                    <p>Sign up to receive our latest news and updates direct to your inbox</p>
                 </div>
-                <!-- End class="newsletter" -->
+            </section>
+            <!-- End class="product-info" -->
 
+            <!-- Product Reviews -->
+            <section class="product-reviews">
+                <div class="container">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <h5>Tell us why you <span class="script">love&#10084;</span> this product</h5>
 
-                <hr />
-
-                <!-- Social icons -->
-                <div class="social">
-                    <h6>Socialize with us</h6>
-
-                    <ul class="social-icons">
-                        <li>
-                            <a class="facebook" href="#" title="Facebook">Facebook</a>
-                        </li>
-
-                        <li>
-                            <a class="instagram" href="#" title="Instagram">Instagram</a>
-                        </li>
-
-                    </ul>
+                        <!-- Facebook comments -->
+                        <div id="fb-root"></div>
+                        <script>
+                            (function(d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0];
+                                if (d.getElementById(id))
+                                    return;
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = "../connect.facebook.net/en_GB/all.js#xfbml=1&appId=460821237293986";
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));
+                        </script>
+                        <div class="fb-comments" data-width="730" data-href="http://la-boutique.twindots.com/product/chaser-overalls" data-num-posts="10"></div>
+                        <!-- End Facebook comments -->
+                    </div>
                 </div>
-                <!-- End class="social" -->
+            </section>
+            <!-- End class="product-reviews" -->
 
+            <!-- Related products -->
+            <section class="product-related">
+                <div class="container">
+                    <div class="col-sm-12">
+
+                        <h5>Can't find what you're looking for? Why not try these&hellip;</h5>
+                        <ul class="product-list isotope">
+                            <li class="standard" data-price="160">
+                                <a href="product.html" title="1300 in Grey">
+                                    <div class="image">
+                                        <img class="primary" src="img/thumbnails/db_file_img_48_640xauto.jpg" alt="Lisette
+                                                                Dress" />
+                                        <img class="secondary" src="img/thumbnails/db_file_img_49_640xauto.jpg" alt="Lisette
+                                                                Dress" />
+
+                                    </div>
+
+                                    <div class="title">
+                                        <div class="prices"><span class="price">£160.00</span></div>
+                                        <h3>1300 in Grey</h3>
+                                    </div>
+
+                                </a>
+                            </li>
+                            <li class="standard" data-price="75">
+                                <a href="product.html" title="574 In Navy">
+                                    <div class="image">
+                                        <img class="primary" src="img/thumbnails/db_file_img_32_640xauto.jpg" alt="El
+                                                                Silencio" />
+                                        <img class="secondary" src="img/thumbnails/db_file_img_33_640xauto.jpg" alt="El
+                                                                Silencio" />
+                                    </div>
+
+                                    <div class="title">
+                                        <div class="prices"><span class="price">£75.00</span></div>
+                                        <h3>574 In Navy</h3>
+                                    </div>
+
+                                </a>
+                            </li>
+                            <li class="standard" data-price="70">
+                                <a href="product.html" title="574 In Red">
+
+                                    <div class="image">
+                                        <img class="primary" src="img/thumbnails/db_file_img_137_640xauto.jpg" alt="" />
+                                        <img class="secondary" src="img/thumbnails/db_file_img_138_640xauto.jpg" alt="" />
+
+                                    </div>
+
+                                    <div class="title">
+                                        <div class="prices"><span class="price">£70.00</span></div>
+                                        <h3>574 In Red</h3>
+                                    </div>
+
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <!-- End class="products-related" -->
+
+            <!-- Added to cart modal window -->
+            <div id="added" class="modal fade" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <div class="hgroup title">
+                                <h3>You're one step closer to owning this product!</h3>
+                                <h5>"Chaser Overalls" has been added to your cart</h5>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="cart.html" class="btn
+                                                    btn-primary btn-sm
+                                                    btn-block-xs">
+                                                    Go to cart &nbsp; <i
+                                                        class="fa
+                                                        fa-chevron-right"></i>
+                                                </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
-<!-- End id="footer" -->
+            <!-- End id="added" -->
 
-<!-- Credits bar -->
-<div class="credits">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8">
-                <p>&copy; 2015 <a href="http://themeforest.net/item/la-boutique-responsive-ecommerce-template/5573130?ref=Tfingi" title="La Boutique">La Boutique</a> &middot; <a href="http://themeforest.net/item/la-boutique-responsive-ecommerce-template/5573130?ref=Tfingi" title="Terms &amp; Conditions">Terms &amp; Conditions</a> &middot; <a href="http://themeforest.net/item/la-boutique-responsive-ecommerce-template/5573130?ref=Tfingi" title="Privacy policy">Privacy policy</a> &middot; All Rights Reserved. </p>
-            </div>
-            <div class="col-sm-4 text-right hidden-xs">
-                <p><a href="http://themeforest.net/item/la-boutique-responsive-ecommerce-template/5573130?ref=Tfingi" title="Responsive eCommerce template">Responsive eCommerce template by Tfingi</a></p>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End class="credits" -->
+        </section>
+        <!-- End class="product-info" -->
 
-			<!-- Credits bar -->
-			<!-- Options panel -->
-            <div class="options-panel-content">
+    </section>
+    <!-- End class="main" -->
 
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="option_color_scheme" class="control-label">Color scheme</label>
-                        <div class="controls">
-                    <select name="option_color_scheme" id="option_color_scheme" class="col-md-12">
-                        <option value="/stylesheets/css/color-schemes/turquoise.css">Turquoise</option>
-                        <option value="/stylesheets/css/color-schemes/greensea.css">Green sea</option>
-                        <option value="/stylesheets/css/color-schemes/emerland.css">Emerland</option>
-                        <option value="/stylesheets/css/color-schemes/nephritis.css">Nephritis</option>
-                        <option value="/stylesheets/css/color-schemes/peterriver.css">Peter river</option>
-                        <option value="/stylesheets/css/color-schemes/belizehole.css">Belizehole</option>
-                        <option value="/stylesheets/css/color-schemes/amethyst.css">Amethyst</option>
-                        <option value="/stylesheets/css/color-schemes/wisteria.css">Wisteria</option>
-                        <option value="/stylesheets/css/color-schemes/wetasphalt.css">Wet asphalt</option>
-                        <option value="/stylesheets/css/color-schemes/midnightblue.css">Midnight blue</option>
-                        <option value="/stylesheets/css/color-schemes/sunflower.css">Sunflower</option>
-                        <option value="/stylesheets/css/color-schemes/orange.css">Orange</option>
-                        <option value="/stylesheets/css/color-schemes/carrot.css">Carrot</option>
-                        <option value="/stylesheets/css/color-schemes/pumpkin.css">Pumpkin</option>
-                        <option value="/stylesheets/css/color-schemes/alizarin.css">Alizarin</option>
-                        <option value="/stylesheets/css/color-schemes/pomegranate.css">Pomegranate</option>
-                    </select>
-                        </div>
+
+                <div class="col-sm-2">
+                    <!-- Support -->
+                    <div class="support">
+                        <h6>Support</h6>
+
+                        <ul class="links">
+                            <li>
+                                <a href="AboutUs" title="About us" class="title">About us</a>
+                            </li>
+                            <li>
+                                <a href="about-us.html" title="About us" class="title">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="about-us.html" title="About us" class="title">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End class="support" -->
+
+                    <hr />
+
+                    <!-- My account -->
+                    <div class="account">
+                        <h6>My account</h6>
+
+                        <ul class="links">
+                            <li>
+                                <a href="login-register.html" title="Login /
+                                                        Register">Login /
+                                                        Register</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End class="account"-->
+
+                </div>
+
+                <div class="col-sm-2">
+
+                    <!-- Categories -->
+                    <div class="categories">
+                        <h6>Shop</h6>
+
+                        <ul class="links">
+                            <li>
+                                <a href="DeLehengaCholi" title="Women">Lehenga
+                                                        Choli</a>
+                            </li>
+                            <li>
+                                <a href="DeLehengaCholi" title="Women">Lehenga
+                                                        Choli</a>
+                            </li>
+                            <li>
+                                <a href="DesignerKurti" title="Men">Kurti</a>
+                            </li>
+                            <li>
+                                <a href="PalazzoKurti" title="Men">Palazzo
+                                                        Kurti</a>
+                            </li>
+                            <li>
+                                <a href="ChexChaniyaCholi" title="Girls">Chex Print
+                                                        Chaniya Choli</a>
+                            </li>
+                            <li>
+                                <a href="DesignerBlouse" title="Boys">Designer
+                                                        Blouse</a>
+                            </li>
+                            <li>
+                                <a href="KidsWear" title="Boys">Kids Wear</a>
+                            </li>
+                            <li>
+                                <a href="Saree" title="Boys">Saree</a>
+                            </li>
+                            <li>
+                                <a href="Gown" title="Boys">Gown</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End class="categories" -->
+
+
+                    <hr />
+                </div>
+                <div class="col-sm-4">
+
+                    <!-- Newsletter subscription -->
+                    <div class="newsletter">
+                        <h6>Newsletter subscription</h6>
+                        <form action="/NewsletterSubscription" method="post">
+
+                            <div class="input-group">
+                                <input type="text" name="Email_ID" class="form-control" />
+                                <input type="submit" value="Send" class="btn
+                                                        btn-primary" />
+                            </div>
+
+                        </form>
+
+                        <p>Sign up to receive our latest news and updates direct to your inbox
+                        </p>
+                    </div>
+                    <!-- End class="newsletter" -->
+
+
+                    <hr />
+
+                    <!-- Social icons -->
+                    <div class="social">
+                        <h6>Socialize with us</h6>
+
+                        <ul class="social-icons">
+                            <li>
+                                <a class="facebook" href="#" title="Facebook">Facebook</a>
+                            </li>
+
+                            <li>
+                                <a class="instagram" href="#" title="Instagram">Instagram</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!-- End class="social" -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End id="footer" -->
+
+    <!-- Credits bar -->
+    <div class="credits">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <p>&copy; 2015 <a href="http://themeforest.net/item/la-boutique-responsive-ecommerce-template/5573130?ref=Tfingi" title="La Boutique">La Boutique</a> &middot; <a href="http://themeforest.net/item/la-boutique-responsive-ecommerce-template/5573130?ref=Tfingi"
+                            title="Terms &amp; Conditions">Terms
+                                                &amp; Conditions</a> &middot; <a href="http://themeforest.net/item/la-boutique-responsive-ecommerce-template/5573130?ref=Tfingi" title="Privacy policy">Privacy
+                                                policy</a> &middot; All Rights Reserved. </p>
+                </div>
+                <div class="col-sm-4 text-right hidden-xs">
+                    <p><a href="http://themeforest.net/item/la-boutique-responsive-ecommerce-template/5573130?ref=Tfingi" title="Responsive eCommerce
+                                                template">Responsive eCommerce
+                                                template by Tfingi</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End class="credits" -->
+
+    <!-- Credits bar -->
+    <!-- Options panel -->
+    <div class="options-panel-content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="option_color_scheme" class="control-label">Color scheme</label>
+                    <div class="controls">
+                        <select name="option_color_scheme" id="option_color_scheme" class="col-md-12">
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/turquoise.css">Turquoise</option>
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/greensea.css">Green
+                                                    sea</option>
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/emerland.css">Emerland</option>
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/nephritis.css">Nephritis</option>
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/peterriver.css">Peter
+                                                    river</option>
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/belizehole.css">Belizehole</option>
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/amethyst.css">Amethyst</option>
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/wisteria.css">Wisteria</option>
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/wetasphalt.css">Wet
+                                                    asphalt</option>
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/midnightblue.css">Midnight
+                                                    blue</option>
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/sunflower.css">Sunflower</option>
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/orange.css">Orange</option>
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/carrot.css">Carrot</option>
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/pumpkin.css">Pumpkin</option>
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/alizarin.css">Alizarin</option>
+                                                <option
+                                                    value="/stylesheets/css/color-schemes/pomegranate.css">Pomegranate</option>
+                                            </select>
                     </div>
                 </div>
             </div>
-    
         </div>
 
-        <div class="options-panel-toggle">
+    </div>
+
+    <div class="options-panel-toggle">
         <a href="#" title=""><i class="fa fa-cog"></i></a>
     </div>
-</div>
-<!-- End class="options-panel" -->
-			
+    </div>
+    <!-- End class="options-panel" -->
 
-		</div>
-   
-		<!-- BEGIN JAVASCRIPTS -->
 
-<script src="/javascripts/js/jquery-1.11.3.min.js"></script>
-<script src="/javascripts/js/bootstrap.min.js"></script>
+    </div>
 
-<!--[if lt IE 9]>
+    <!-- BEGIN JAVASCRIPTS -->
+
+    <script src="/javascripts/js/jquery-1.11.3.min.js"></script>
+    <script src="/javascripts/js/bootstrap.min.js"></script>
+
+    <!--[if lt IE 9]>
 <script src="js/html5shiv.js"></script>
 <![endif]-->
+    <script src="/javascripts/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/javascripts/js/isotope.pkgd.min.js"></script>
+    <script src="/javascripts/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/javascripts/js/jquery.flexslider.js"></script>
+    <script src="/javascripts/js/jquery-ui-1.10.2.custom.js"></script>
+    <script src="/javascripts/js/jquery.easing.min.js"></script>
+    <script src="/javascripts/js/jquery.elevatezoom.js"></script>
+    <script src="/javascripts/js/jquery.sharrre-1.3.5.js"></script>
+    <script src="/javascripts/js/jquery.cookie.js"></script>
+    <script src="/javascripts/js/la_boutique.js"></script>
+    <script src="/javascripts/js/tfingi-megamenu/tfingi-megamenu-frontend.js"></script>
+    <!-- END JAVASCRIPTS -->
 
-<script src="/javascripts/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="/javascripts/js/isotope.pkgd.min.js"></script>
-<script src="/javascripts/js/imagesloaded.pkgd.min.js"></script>
-<script src="/javascripts/js/jquery.flexslider.js"></script>
-<script src="/javascripts/js/jquery-ui-1.10.2.custom.js"></script>
-<script src="/javascripts/js/jquery.easing.min.js"></script>
-<script src="/javascripts/js/jquery.elevatezoom.js"></script>
-<script src="/javascripts/js/jquery.sharrre-1.3.5.js"></script>
-<script src="/javascripts/js/jquery.cookie.js"></script>
-<script src="/javascripts/js/la_boutique.js"></script>
-<script src="/javascripts/js/tfingi-megamenu/tfingi-megamenu-frontend.js"></script>
+    </body>
 
-<!-- END JAVASCRIPTS -->
+    <!-- Mirrored from alpha.laboutiquetheme.com/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Dec 2018 14:21:31 GMT -->
 
-	</body>
-
-<!-- Mirrored from alpha.laboutiquetheme.com/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 20 Dec 2018 14:21:31 GMT -->
-</html>
+    </html>

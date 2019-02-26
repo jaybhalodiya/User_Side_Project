@@ -1,4 +1,6 @@
 var express = require('express')
+var passport = require('passport');
+
 var router = express.Router()
 
 var Cont = require('../models/ContactUs.models.js')
@@ -6,6 +8,7 @@ var Nw = require('../models/NewsletterSubscription.models.js')
 var Prod = require('../models/Peoduct.models.js')
 
 var AddTo = require('../models/AddToCart.models.js')
+var UserLogin = require('../models/user.js')
 
 var multer = require('multer')
 var storage = multer.diskStorage({
@@ -29,6 +32,8 @@ router.get('/', function(req, res, next) {
 
 /* GET Login Register page. */
 router.get('/LoginReg', function(req, res, next) {
+    console.log("-------------------", req.flash('signupMessage'));
+
     res.render('LoginReg')
 })
 
@@ -46,6 +51,9 @@ router.get('/AboutUs', function(req, res, next) {
 
 /* GET Cart  page. */
 router.get('/Cart', function(req, res, next) {
+
+
+    // req.session.passport.user
     res.render('Cart')
 })
 
@@ -136,6 +144,23 @@ router.get('/ComboWear', function(req, res, next) {
             console.log(data)
             res.render('ComboWear', {
                 ComboWear: data
+            })
+        }
+    )
+})
+
+
+
+/**cart show data ready */
+
+router.get('/Cart', function(req, res, next) {
+    Prod.find({
+            user_id: req.session.passport.user
+        },
+        function(err, data) {
+            console.log(data)
+            res.render('Cart', {
+                Cart: data
             })
         }
     )
@@ -283,14 +308,33 @@ router.get('/Saree', function(req, res, next) {
 })
 
 router.get('/Home', function(req, res, next) {
+    console.log("-------", req.session);
+    // let isLogin = false;
     Prod.find({}, function(err, data) {
+        if (req.session.passport) {
+            // isLogin=true
+            // req.session.passport.user
+            UserLogin.findById(req.session.passport.user, function(err, user) {
+                res.render('Home', {
+                    Home: data,
+                    userdata: user,
+                    isLogin: true
+                })
+            })
+
+        } else {
+            res.render('Home', {
+                Home: data,
+                isLogin: false
+            })
+        }
         console.log(data)
-        res.render('Home', {
-            Home: data
-        })
+
     }).limit(10)
 })
 
+
+//userdata.UserName
 router.get('/ShowFullDetails/:id', function(req, res) {
     console.log(req.params.id)
     Prod.findById(req.params.id, function(err, user) {
@@ -328,26 +372,46 @@ router.post('/ShowFullDetails/:id', function(req, res) {
 
 
 router.post('/Cart', function(req, res, next) {
+    console.log("-------", req.session);
+    let product = Prod.findById(req.body.id, function(err, data) {
+        console.log(data);
+        const st = new AddTo({
+            id: 0,
+            Product_Name: data.Product_Name,
+            QTY: 1,
+            Price: data.Price,
+            Image: data.Image,
+            user_id: req.session.passport.user
 
-    const st = new AddTo({
-        id: 0,
-        Product_Name: req.body.Product_Name,
-        QTY: req.body.QTY,
-        Price: req.body.Price,
-        Image: req.body.Image,
+        });
+        st.save().then(() => {
+            console.log("insert success");
+            res.redirect('/Cart');
 
+        }).catch(() => {
+            console.log("error");
+        });
+    })
 
-    });
-    st.save().then(() => {
-        console.log("insert success");
-        res.redirect('/Cart');
-
-    }).catch(() => {
-        console.log("error");
-    });
 });
 
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    res.redirect('/');
+}
 
+router.post('/signup', passport.authenticate('local-signup', {
+    successRedirect: '/Home',
+    failureRedirect: '/LoginReg',
+    failureFlash: true,
+}));
+
+router.post('/login', passport.authenticate('local-login', {
+    successRedirect: '/Home',
+    failureRedirect: '/login',
+    failureFlash: true,
+}));
 
 
 
