@@ -43,7 +43,8 @@
 					 background-size: cover;
 			 }
 
-
+			 article, aside, figure, footer, header, hgroup, 
+  menu, nav, section { display: block; }
 
 	 </style>
 
@@ -255,19 +256,23 @@
 																						<center><li class="megamenu-heading"><a href="#MegaMenuHeading">Customize Order</a></li></center>
 																						<li class="megamenu-content">
 																								<div class="wpcf7">
-																										<form action="#" method="post" class="wpcf7-form" novalidate="novalidate">
+																										<form action="/CustomeOrder" method="post" class="wpcf7-form" novalidate="novalidate">
 																												<label>Your Name (required)</label><br>
-																												<input type="text" name="your-name" value="" size="40" aria-required="true" /><br>
+																												<input type="text" name="Your_Name" value="" size="40" aria-required="true" /><br>
 																												<label>Your Phone no. (required)</label><br>
-																												<input type="text" name="your-name" value="" size="40" aria-required="true" /><br>
+																												<input type="text" name="Phone_Number" value="" size="40" aria-required="true" /><br>
 																												<label>Your Email (required)</label><br>
-																												<input type="email" name="your-email" value="" size="40"aria-required="true" /><br>
+																												<input type="email" name="Email_ID" value="" size="40"aria-required="true" /><br>
 																												<label>City</label><br>
-																												<input type="text" name="your-subject" value="" size="40" /><br>
+																												<input type="text" name="City" value="" size="40" /><br>
 																												<label>State</label><br>
-																												<input type="text" name="your-subject" value="" size="40" /><br>
+																												<input type="text" name="State" value="" size="20" /><br>
+																												<input type='file' onchange="readURL(this);" name="Image" />
+																												<img id="blah" src="#" alt="your image" />
+																											
+
 																												<label>Your Message(Customize Order Requirments)</label><br>
-																												<textarea name="your-message" cols="40" rows="10" ></textarea>
+																												<textarea name="Your_Message" cols="40" rows="10" ></textarea>
 
 																												<input type="submit" value="Send" class="btn btn-primary" />
 																										</form>
@@ -319,5 +324,22 @@
     </div>
 </nav>
 
+<script>
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+</script>
 </body>
 </html>

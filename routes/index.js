@@ -9,6 +9,7 @@ var Prod = require('../models/Peoduct.models.js')
 
 var AddTo = require('../models/AddToCart.models.js')
 var UserLogin = require('../models/user.js')
+var Custom = require('../models/CustomeOrder.models.js')
 
 var multer = require('multer')
 var storage = multer.diskStorage({
@@ -37,12 +38,30 @@ router.get('/LoginReg', function(req, res, next) {
     res.render('LoginReg')
 })
 
-/* GET Kids Wear page. */
 
 
 
 
 
+/* GET CheckOut start  page. */
+router.get('/CheckoutStart', function(req, res, next) {
+    res.render('CheckoutStart')
+})
+
+/* GET Checkout Started  page. */
+router.get('/CheckoutStarted', function(req, res, next) {
+    res.render('CheckoutStarted')
+})
+
+/* GET Shipping Address  page. */
+router.get('/ShippingAddress', function(req, res, next) {
+    res.render('ShippingAddress')
+})
+
+/* GET Shipping Method  page. */
+router.get('/ShippingMethod', function(req, res, next) {
+    res.render('ShippingMethod')
+})
 
 /* GET About Us  page. */
 router.get('/AboutUs', function(req, res, next) {
@@ -80,6 +99,36 @@ router.post('/ContactUs', function(req, res, next) {
             console.log('Error')
         })
 })
+
+router.post('/CustomeOrder', function(req, res, next) {
+    const pro = new Custom({
+        id: 0,
+        Your_Name: req.body.Your_Name,
+        Phone_Number: req.body.Phone_Number,
+        Email_ID: req.body.Email_ID,
+        City: req.body.City,
+        Image: req.body.Image,
+        Your_Message: req.body.Your_Message
+    })
+    pro
+        .save()
+        .then(() => {
+            console.log('Insert Success')
+
+            res.redirect('/Home')
+        })
+        .catch(() => {
+            console.log('Error')
+        })
+})
+
+
+
+
+
+
+
+
 
 router.post('/NewsletterSubscription', function(req, res, next) {
     const pro = new Nw({
@@ -387,6 +436,17 @@ router.post('/Cart', function(req, res, next) {
         });
     })
 
+});
+
+
+router.get('/deletesCart/:id', function(req, res) {
+    AddTo.findByIdAndRemove(req.params.id, function(err, project) {
+        if (err) {
+            res.redirect('/Cart');
+        } else {
+            res.redirect('/Cart');
+        }
+    });
 });
 
 function isLoggedIn(req, res, next) {
