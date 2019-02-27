@@ -49,13 +49,7 @@ router.get('/AboutUs', function(req, res, next) {
     res.render('AboutUs')
 })
 
-/* GET Cart  page. */
-router.get('/Cart', function(req, res, next) {
 
-
-    // req.session.passport.user
-    res.render('Cart')
-})
 
 /* GET Product  page. */
 router.get('/Product', function(req, res, next) {
@@ -154,7 +148,7 @@ router.get('/ComboWear', function(req, res, next) {
 /**cart show data ready */
 
 router.get('/Cart', function(req, res, next) {
-    Prod.find({
+    AddTo.find({
             user_id: req.session.passport.user
         },
         function(err, data) {
@@ -409,7 +403,7 @@ router.post('/signup', passport.authenticate('local-signup', {
 
 router.post('/login', passport.authenticate('local-login', {
     successRedirect: '/Home',
-    failureRedirect: '/login',
+    failureRedirect: '/LoginReg',
     failureFlash: true,
 }));
 
