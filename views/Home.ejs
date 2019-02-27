@@ -1,12 +1,16 @@
 <% include partials/header %>
 <!-- End class="navigation" -->
 
-
+<%if(isLogin != undefined && isLogin == true){%>
+<span style="display: block;text-align: right;background: white;padding: 10px;font-size: 16px;">
+welcome,<%=userdata.local.email%>
+</span>
+<%}%>
 			<!-- Content section -->
 			<section class="main">
 
-
-
+           
+           
 <!-- Home content -->
 <section class="home">
 

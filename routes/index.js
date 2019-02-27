@@ -1,5 +1,5 @@
 var express = require('express')
-var passport = require('passport');
+var passport = require('passport')
 
 var router = express.Router()
 
@@ -33,15 +33,10 @@ router.get('/', function(req, res, next) {
 
 /* GET Login Register page. */
 router.get('/LoginReg', function(req, res, next) {
-    console.log("-------------------", req.flash('signupMessage'));
+    console.log('-------------------', req.flash('signupMessage'))
 
     res.render('LoginReg')
 })
-
-
-
-
-
 
 /* GET CheckOut start  page. */
 router.get('/CheckoutStart', function(req, res, next) {
@@ -68,8 +63,6 @@ router.get('/AboutUs', function(req, res, next) {
     res.render('AboutUs')
 })
 
-
-
 /* GET Product  page. */
 router.get('/Product', function(req, res, next) {
     res.render('Product')
@@ -80,7 +73,7 @@ router.get('/form', function(req, res, next) {
         res.render('form')
     })
     /** insert record */
-router.post('/ContactUs', function(req, res, next) {
+router.post('/ContactUs', isLoggedIn, function(req, res, next) {
     const pro = new Cont({
         id: 0,
         Your_Name: req.body.Your_Name,
@@ -100,7 +93,7 @@ router.post('/ContactUs', function(req, res, next) {
         })
 })
 
-router.post('/CustomeOrder', function(req, res, next) {
+router.post('/CustomeOrder', isLoggedIn, function(req, res, next) {
     const pro = new Custom({
         id: 0,
         Your_Name: req.body.Your_Name,
@@ -121,14 +114,6 @@ router.post('/CustomeOrder', function(req, res, next) {
             console.log('Error')
         })
 })
-
-
-
-
-
-
-
-
 
 router.post('/NewsletterSubscription', function(req, res, next) {
     const pro = new Nw({
@@ -174,11 +159,6 @@ router.post('/Product', upload.any(), function(req, res, next) {
         })
 })
 
-
-
-
-
-
 router.get('/ComboWear', function(req, res, next) {
     Prod.find({
             Category_Name: 'Combo Wear'
@@ -192,11 +172,9 @@ router.get('/ComboWear', function(req, res, next) {
     )
 })
 
+/** cart show data ready */
 
-
-/**cart show data ready */
-
-router.get('/Cart', function(req, res, next) {
+router.get('/Cart', isLoggedIn, function(req, res, next) {
     AddTo.find({
             user_id: req.session.passport.user
         },
@@ -209,23 +187,25 @@ router.get('/Cart', function(req, res, next) {
     )
 })
 
-
-
-
 router.get('/Saree', function(req, res, next) {
     Prod.find({
             Category_Name: 'Saree'
         },
         function(err, data) {
             console.log(data)
-            res.render('Saree', {
-                Saree: data
+            Prod.find({
+                Category_Name: 'Saree'
+            }).count(function(err, sareeCount) {
+                console.log('----------', sareeCount)
+
+                res.render('Saree', {
+                    Saree: data,
+                    sareeCount: sareeCount
+                })
             })
         }
     )
 })
-
-
 
 router.get('/DesignerBlouse', function(req, res, next) {
     Prod.find({
@@ -239,11 +219,6 @@ router.get('/DesignerBlouse', function(req, res, next) {
         }
     )
 })
-
-
-
-
-
 
 router.get('/PalazzoKurti', function(req, res, next) {
     Prod.find({
@@ -351,20 +326,22 @@ router.get('/Saree', function(req, res, next) {
 })
 
 router.get('/Home', function(req, res, next) {
-    console.log("-------", req.session);
-    // let isLogin = false;
+    console.log('-------', req.session)
+        // let isLogin = false;
+
     Prod.find({}, function(err, data) {
         if (req.session.passport) {
             // isLogin=true
             // req.session.passport.user
             UserLogin.findById(req.session.passport.user, function(err, user) {
+                console.log('-----------------------------------------------', user)
+
                 res.render('Home', {
                     Home: data,
                     userdata: user,
                     isLogin: true
                 })
             })
-
         } else {
             res.render('Home', {
                 Home: data,
@@ -372,13 +349,11 @@ router.get('/Home', function(req, res, next) {
             })
         }
         console.log(data)
-
     }).limit(10)
 })
 
-
-//userdata.UserName
-router.get('/ShowFullDetails/:id', function(req, res) {
+// userdata.UserName
+router.get('/ShowFullDetails/:id', isLoggedIn, function(req, res) {
     console.log(req.params.id)
     Prod.findById(req.params.id, function(err, user) {
         if (err) {
@@ -404,20 +379,10 @@ router.post('/ShowFullDetails/:id', function(req, res) {
     })
 })
 
-
-
-
-
-
-
-
-
-
-
 router.post('/Cart', function(req, res, next) {
-    console.log("-------", req.session);
+    console.log('-------', req.session)
     let product = Prod.findById(req.body.id, function(err, data) {
-        console.log(data);
+        console.log(data)
         const st = new AddTo({
             id: 0,
             Product_Name: data.Product_Name,
@@ -425,48 +390,49 @@ router.post('/Cart', function(req, res, next) {
             Price: data.Price,
             Image: data.Image,
             user_id: req.session.passport.user
-
-        });
-        st.save().then(() => {
-            console.log("insert success");
-            res.redirect('/Cart');
-
-        }).catch(() => {
-            console.log("error");
-        });
+        })
+        st.save()
+            .then(() => {
+                console.log('insert success')
+                res.redirect('/Cart')
+            })
+            .catch(() => {
+                console.log('error')
+            })
     })
-
-});
-
+})
 
 router.get('/deletesCart/:id', function(req, res) {
     AddTo.findByIdAndRemove(req.params.id, function(err, project) {
         if (err) {
-            res.redirect('/Cart');
+            res.redirect('/Cart')
         } else {
-            res.redirect('/Cart');
+            res.redirect('/Cart')
         }
-    });
-});
+    })
+})
 
 function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated())
-        return next();
-    res.redirect('/');
+    if (req.isAuthenticated()) return next()
+    res.redirect('/LoginReg')
 }
 
-router.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/Home',
-    failureRedirect: '/LoginReg',
-    failureFlash: true,
-}));
+router.post(
+    '/signup',
+    passport.authenticate('local-signup', {
+        successRedirect: '/Home',
+        failureRedirect: '/LoginReg',
+        failureFlash: true
+    })
+)
 
-router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/Home',
-    failureRedirect: '/LoginReg',
-    failureFlash: true,
-}));
-
-
+router.post(
+    '/login',
+    passport.authenticate('local-login', {
+        successRedirect: '/Home',
+        failureRedirect: '/LoginReg',
+        failureFlash: true
+    })
+)
 
 module.exports = router
