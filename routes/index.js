@@ -68,6 +68,11 @@ router.get('/Product', function(req, res, next) {
     res.render('Product')
 })
 
+/* GET Customize Order  page. */
+router.get('/CustomOrder', function(req, res, next) {
+    res.render('CustomOrder')
+})
+
 /** form router */
 router.get('/form', function(req, res, next) {
         res.render('form')
@@ -93,7 +98,7 @@ router.post('/ContactUs', isLoggedIn, function(req, res, next) {
         })
 })
 
-router.post('/CustomeOrder', isLoggedIn, function(req, res, next) {
+router.post('/CustomOrder', isLoggedIn, function(req, res, next) {
     const pro = new Custom({
         id: 0,
         Your_Name: req.body.Your_Name,
