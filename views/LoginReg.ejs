@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label class="control-label" for="login_email">Email</label>
                             <div class="controls">
-                                <input class="form-control" id="login_email" type="text" name="email" value="" />
+                                <input class="form-control" id="login_email" type="text" name="email" value="" onblur="validateEmail(this);" />
                             </div>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
 		                    <div class="form-group">
 		                        <label class="control-label" for="email">Email address</label>
 		                        <div class="controls">
-		                            <input type="text" class="form-control" id="email" name="email" value=""  />
+		                            <input type="text" class="form-control" id="email" name="email" value="" onblur="validateEmail(this);"  />
 		                        </div>
 		                    </div>
 		                </div>
@@ -394,8 +394,20 @@
 <script src="/javascripts/js/jquery.cookie.js"></script>
 <script src="/javascripts/js/la_boutique.js"></script>
 <script src="/javascripts/js/tfingi-megamenu/tfingi-megamenu-frontend.js"></script>
+<script>
+function validateEmail(emailField){
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z])$/;
 
+        if (reg.test(emailField.value) == false) 
+        {
+            alert('Invalid Email Address');
+            return false;
+        }
 
+        return true;
+
+}
+</script>
 
 <!-- END JAVASCRIPTS -->
 	

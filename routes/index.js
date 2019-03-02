@@ -69,7 +69,7 @@ router.get('/Product', function(req, res, next) {
 })
 
 /* GET Customize Order  page. */
-router.get('/CustomOrder', function(req, res, next) {
+router.get('/CustomOrder', isLoggedIn, function(req, res, next) {
     res.render('CustomOrder')
 })
 

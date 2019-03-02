@@ -17,6 +17,7 @@ module.exports = function(passport) {
             passReqToCallback: true,
         },
         function(req, email, password, done) {
+            console.log("/////////////", req.body)
             process.nextTick(function() {
                 User.findOne({
                     'local.email': email
@@ -29,11 +30,13 @@ module.exports = function(passport) {
                         var newUser = new User();
                         newUser.local.email = email;
                         newUser.local.password = newUser.generateHash(password);
-                        newUser.save(function(err) {
-                            if (err)
-                                throw err;
-                            return done(null, newUser);
-                        });
+                        First_Name: req.body.First_Name,
+
+                            newUser.save(function(err) {
+                                if (err)
+                                    throw err;
+                                return done(null, newUser);
+                            });
                     }
                 });
             });
