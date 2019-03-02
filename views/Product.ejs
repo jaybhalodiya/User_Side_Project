@@ -101,15 +101,36 @@
                                                 </div>
 
                                                 <div class="short-description">
-                                                    <p>
+                                                    <p>Description:
                                                         <%=
                                                                     Product.Description%>
                                                     </p>
                                                 </div>
 
+                                                <div class="short-description">
+                                                <p>Category:
+                                                    <%=
+                                                                Product.Category_Name%>
+                                                </p>
+                                            </div>
+
+                                            <div class="short-description">
+                                            <p>Brand:
+                                                <%=
+                                                            Product.Brand_Name%>
+                                            </p>
+                                        </div>
+
+                                        <div class="short-description">
+                                        <p>Size:
+                                            <%=
+                                                        Product.Size%>
+                                        </p>
+                                    </div>
+
 
                                                 <div class="short-description">
-                                                    <p>
+                                                    <p>Color:
                                                         <%=
                                                                         Product.Color_Name%>
                                                     </p>
@@ -155,7 +176,9 @@
                                                                         Product.Description
                                                                         %></span><br /><br />
                                                 <span>100%
-                                                                        Polyester</span>
+                                                                        Polyester</span><br /><br />
+                                                Offer: <span><%=Product.Offer %></span>   
+                                                                        
                                             </p>
                                         </div>
                                         <!-- End id="description" -->

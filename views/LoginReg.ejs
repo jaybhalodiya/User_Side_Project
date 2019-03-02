@@ -1,6 +1,31 @@
 <% include partials/header %>
 <!-- End class="navigation" -->
+<head>
 
+<script language="Javascript" type="text/javascript">
+
+function onlyAlphabets(e, t) {
+    try {
+        if (window.event) {
+            var charCode = window.event.keyCode;
+        }
+        else if (e) {
+            var charCode = e.which;
+        }
+        else { return true; }
+        if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+            return true;
+        else
+            return false;
+    }
+    catch (err) {
+        alert(err.Description);
+    }
+}
+
+</script>
+
+</head>
 			
 			<!-- Content section -->	
 			<section class="main">
@@ -103,7 +128,7 @@
 		                    <div class="form-group">
 		                        <label class="control-label" for="first_name">First name</label>
 		                        <div class="controls">
-		                            <input type="text" class="form-control" id="first_name" name="First_Name" value="" />
+		                            <input type="text" class="form-control" id="first_name" name="First_Name" value="" onkeypress="return onlyAlphabets(event,this);" />
 		                        </div>
 		                    </div>
 		                </div>
@@ -112,7 +137,7 @@
 		                    <div class="form-group">
 		                        <label class="control-label" for="last_name">Last name</label>
 		                        <div class="controls">
-		                            <input type="text" class="form-control" id="last_name" name="Last_Name" value="" />
+		                            <input type="text" class="form-control" id="last_name" name="Last_Name" value="" onkeypress="return onlyAlphabets(event,this);" />
 		                        </div>
 		                    </div>
 		                </div>
@@ -408,6 +433,8 @@ function validateEmail(emailField){
 
 }
 </script>
+
+
 
 <!-- END JAVASCRIPTS -->
 	
