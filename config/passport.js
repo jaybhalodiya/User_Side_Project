@@ -30,13 +30,13 @@ module.exports = function(passport) {
                         var newUser = new User();
                         newUser.local.email = email;
                         newUser.local.password = newUser.generateHash(password);
-                        First_Name: req.body.First_Name,
-
-                            newUser.save(function(err) {
-                                if (err)
-                                    throw err;
-                                return done(null, newUser);
-                            });
+                        newUser.local.First_Name = req.body.First_Name;
+                        newUser.local.Last_Name = req.body.Last_Name;
+                        newUser.save(function(err) {
+                            if (err)
+                                throw err;
+                            return done(null, newUser);
+                        });
                     }
                 });
             });
