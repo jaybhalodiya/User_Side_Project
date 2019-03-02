@@ -218,8 +218,16 @@ router.get('/DesignerBlouse', function(req, res, next) {
         },
         function(err, data) {
             console.log(data)
-            res.render('DesignerBlouse', {
-                DesignerBlouse: data
+            Prod.find({
+                Category_Name: 'Designer Blouse'
+            }).count(function(err, designerBlousecount) {
+                console.log('--------------------------------------', designerBlousecount)
+                res.render('DesignerBlouse', {
+                    DesignerBlouse: data,
+                    designerBlousecount: designerBlousecount,
+
+
+                })
             })
         }
     )
@@ -331,7 +339,7 @@ router.get('/Saree', function(req, res, next) {
 })
 
 router.get('/Home', function(req, res, next) {
-    console.log('-------', req.session)
+    console.log('-------', req.session, res.locals)
         // let isLogin = false;
 
     Prod.find({}, function(err, data) {
@@ -343,8 +351,7 @@ router.get('/Home', function(req, res, next) {
 
                 res.render('Home', {
                     Home: data,
-                    userdata: user,
-                    isLogin: true
+                    userdata: user
                 })
             })
         } else {
@@ -439,5 +446,8 @@ router.post(
         failureFlash: true
     })
 )
-
+router.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/Home');
+})
 module.exports = router

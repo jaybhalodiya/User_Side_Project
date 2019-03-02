@@ -57,10 +57,16 @@
         <div class="container">
             <div class="row">
                 
-                <div class="col-sm-6 hidden-xs">
+                <div class="col-sm-12 hidden-xs">
                     <ul class="list-inline pull-right">
-                        <li>
-                            <a href="LoginReg" title="Login / Register">Login / Register</a>
+						<li>
+							<% if(isLogin == true){ %>
+								 Welcome, <%=user.local.email%> 
+								<a href="/logout" title="Login / Register">Logout</a>
+							<% }else{ %>
+								<a href="LoginReg" title="Login / Register">Login / Register</a>
+
+							<%}%>
 						</li>
 					
                     </ul>

@@ -9,6 +9,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
+var UserLogin = require('./models/user');
 
 
 
@@ -29,9 +30,6 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
-
 mongoose.connect(dbConfig.url).then(() => {
     console.log("connect sucess");
 }).catch(() => {
@@ -47,7 +45,33 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use(function(req, res, next) {
+    console.log(req.session);
+    res.locals.isLogin = false;
+    if (req.session.passport) {
+        if (req.session.passport.user) {
+            UserLogin.findById(req.session.passport.user, function(err, user) {
+                res.locals.user = user;
+                res.locals.isLogin = true;
+                next();
 
+            })
+
+        } else {
+            res.locals.isLogin = false;
+            next();
+
+
+        }
+    } else {
+        res.locals.isLogin = false;
+        next();
+
+    }
+    console.log("-*-*-*-*-*-*-*-", res.locals);
+
+
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
