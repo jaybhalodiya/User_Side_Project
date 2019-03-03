@@ -63,7 +63,7 @@
                                                 </td>
     
                                                 <td data-title="Qty" class="col_qty text-right">
-                                                    <input type="text" name="item_quantity[]" value="<%= demo.QTY %>" />
+                                                    <input type="text" name="item_quantity[]" value="<%= demo.QTY %>" readOnly/>
                                                 </td>
     
                                                 <td data-title="Single" class="col_single text-right">
@@ -73,7 +73,7 @@
                                             
     
                                                 <td data-title="Total" class="col_total text-right">
-                                                    <span class="total-price">£87.98</span>
+                                                    <span class="total-price"><%= demo.Price %></span>
                                                 </td>
                                             </tr>
                                             <%}) %>
@@ -209,8 +209,8 @@
                             </div>
     
                             <ul class="price-list">
-                                <li>Subtotal: <strong>£247.98</strong></li>
-                                <li class="important">Total: <strong>£247.98</strong></li>
+                                <li>Subtotal: <strong><%=total%></strong></li>
+                                <li class="important">Total: <strong><%=total%></strong></li>
                             </ul>
                         </div>
                     </div>

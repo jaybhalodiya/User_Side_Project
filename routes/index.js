@@ -236,8 +236,14 @@ router.get('/Cart', isLoggedIn, function(req, res, next) {
         },
         function(err, data) {
             console.log(data)
+            let total = 0;
+            for (let index = 0; index < data.length; index++) {
+                const element = data[index];
+                total = total + element.Price;
+            }
             res.render('Cart', {
-                Cart: data
+                Cart: data,
+                total:total
             })
         }
     )
