@@ -152,12 +152,16 @@ router.post('/ContactUs', isLoggedIn, function(req, res, next) {
 router.post('/CustomOrder', isLoggedIn, function(req, res, next) {
     const pro = new Custom({
         id: 0,
-        Your_Name: req.body.Your_Name,
-        Phone_Number: req.body.Phone_Number,
-        Email_ID: req.body.Email_ID,
-        City: req.body.City,
+        UserName: req.body.UserName,
+        Measurements: req.body.Measurements,
+        EmailID: req.body.EmailID,
+        Phone: req.body.Phone,
+        Message: req.body.Message,
         Image: req.body.Image,
-        Your_Message: req.body.Your_Message
+        Work_Name: req.body.Work_Name,
+        Size: req.body.Size,
+        City_Name: req.body.City_Name,
+        Area_Name: req.body.Area_Name
     })
     pro
         .save()
@@ -243,7 +247,7 @@ router.get('/Cart', isLoggedIn, function(req, res, next) {
             }
             res.render('Cart', {
                 Cart: data,
-                total:total
+                total: total
             })
         }
     )

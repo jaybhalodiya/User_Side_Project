@@ -2,12 +2,17 @@ const mongoose = require('mongoose');
 
 const Custom = mongoose.Schema({
 
-    Your_Name: String,
-    Phone_Number: Number,
-    Email_ID: String,
-    City: String,
+    UserName: String,
+    Measurements: String,
+    EmailID: String,
+    Phone: Number,
+    Message: String,
     Image: String,
-    Your_Message: String,
+    Work_Name: String,
+    Size: String,
+    City_Name: String,
+    Area_Name: String
+
 }, {
     timespace: true,
 });
