@@ -10,7 +10,10 @@ var Prod = require('../models/Peoduct.models.js')
 var AddTo = require('../models/AddToCart.models.js')
 var UserLogin = require('../models/user.js')
 var Custom = require('../models/CustomeOrder.models.js')
-
+var Typwrk = require('../models/TypesOfWork.models.js')
+var Siz = require('../models/Size.models.js')
+var cty = require('../models/City.models.js')
+var Ara = require('../models/Area.models.js')
 var multer = require('multer')
 var storage = multer.diskStorage({
     destination: './public/images/upload',
@@ -68,9 +71,57 @@ router.get('/Product', function(req, res, next) {
     res.render('Product')
 })
 
+
+router.get('/getarea', function(req, res, next) {
+    Ara.find({
+        City_Name: req.query.city_name
+    }, function(err, data) {
+        res.json({
+            area: data
+        })
+    })
+});
+
+
+
 /* GET Customize Order  page. */
 router.get('/CustomOrder', isLoggedIn, function(req, res, next) {
-    res.render('CustomOrder')
+    Typwrk.find(function(err, users) {
+        if (err) {
+            console.log(err)
+        } else {
+            Siz.find(function(err, anuser) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    cty.find(function(err, cuser) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            Ara.find(function(err, auser) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+
+
+
+                                    res.render('CustomOrder', {
+                                        users: users,
+                                        anuser: anuser,
+                                        cuser: cuser,
+                                        auser: auser
+
+                                    })
+                                    console.log(users);
+                                }
+                            })
+
+                        }
+                    })
+                }
+            });
+        }
+    })
 })
 
 /** form router */
@@ -221,12 +272,13 @@ router.get('/DesignerBlouse', function(req, res, next) {
             Prod.find({
                 Category_Name: 'Designer Blouse'
             }).count(function(err, designerBlousecount) {
-                console.log('--------------------------------------', designerBlousecount)
+                console.log(
+                    '--------------------------------------',
+                    designerBlousecount
+                )
                 res.render('DesignerBlouse', {
                     DesignerBlouse: data,
-                    designerBlousecount: designerBlousecount,
-
-
+                    designerBlousecount: designerBlousecount
                 })
             })
         }
@@ -447,7 +499,7 @@ router.post(
     })
 )
 router.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/Home');
+    req.logout()
+    res.redirect('/Home')
 })
 module.exports = router

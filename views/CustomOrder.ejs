@@ -1,5 +1,6 @@
 <% include partials/header %>
 
+
 <br>
 <br>
 <center><h4>Customize Order</h4></center>
@@ -11,46 +12,90 @@
         margin-left:200px;
         margin-right:200px;
     }
+ 
+    .cover-img{
+        width: 100%;
+       height: 600px;
+       background-position: center;
+     background-repeat: no-repeat;
+        background-size: cover;
+}
+
+article, aside, figure, footer, header, hgroup, 
+menu, nav, section { display: block; }
+
 </style>
 
-<form>
+<form method="post" autocomplete="off">
 <div class="toper">
   <div class="form-row">
     <div class="form-group col-md-6" >
-      <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+      <label for="inputEmail4">User Name</label>
+      <input type="text" class="form-control" id="inputEmail4" placeholder="User Name">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">Password</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+      <label for="inputPassword4">Measurements</label>
+      <input type="text" class="form-control" id="inputPassword4" placeholder="Measurement">
     </div>
   </div>
   <div class="form-group" style="margin:15px;">
-    <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <label for="inputAddress">Description</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="Description">
   </div>
   <div class="form-group" style="margin:15px;">
-    <label for="inputAddress2">Address 2</label>
-    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+
+  <input type='file' onchange="readURL(this);" name="Image" />
+  <img id="blah" src="#" alt="your image" />
+
   </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity">
-    </div>
-    <div class="form-group col-md-4">
-      <label for="inputState">State</label>
-      <select id="inputState" class="form-control">
-        <option selected>Choose...</option>
-        <option>...</option>
-      </select>
-    </div>
-    <div class="form-group col-md-2">
-      <label for="inputZip">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
-    </div>
-  </div>
-  <div class="form-group">
+
+
+  <div class="form-group" style="margin:15px;">
+
+<label>Types Of Work</label>
+  <select class="form-control" name="Work_Name">
+  <% for(var i = 0; i<users.length; i++){%>
+    <option><%= users[i].Work_Name %></option>
+  <%} %>
+  </select>
+
+
+</div>
+
+<div class="form-group" style="margin:15px;">
+
+<label>Size</label>
+  <select class="form-control" name="Size">
+  <% for(var i = 0; i<anuser.length; i++){%>
+    <option><%= anuser[i].Size %></option>
+  <%} %>
+  </select>
+
+
+</div>
+
+<div class="form-group" style="margin:15px;">
+<label>City</label>
+<select class="form-control" name="City_Name" id="city">
+<% for(var i=0; i<cuser.length;i++) { %>
+  <option value="<%= cuser[i].City_Name%>"><%= cuser[i].City_Name %></option>
+  <% } %>
+</select>
+</div>
+
+
+<div class="form-group" style="margin:15px;">
+<label>Area</label>
+<select class="form-control" name="Area_Name" id="area">
+</select>
+</div>
+
+
+
+
+
+ 
+  <div class="form-group" style="margin:15px;">
     <div class="form-check">
       <input class="form-check-input" type="checkbox" id="gridCheck">
       <label class="form-check-label" for="gridCheck">
@@ -58,9 +103,11 @@
       </label>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Sign in</button>
+  <button type="submit" class="btn btn-primary" style="margin:15px;">Sign in</button>
   </div>
 </form>
+
+
 
 <br />
 
@@ -274,6 +321,40 @@
         <script src="/javascripts/js/tfingi-megamenu/tfingi-megamenu-frontend.js"></script>
         
         <!-- END JAVASCRIPTS -->
+
+        <script>
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+</script>
+
+
+<script type="text/javascript">
+    $('#city').change(function(e){
+      console.log("change",e.target.value);
+      $.get('/getarea?city_name='+e.target.value,function(res){
+      console.log(res);
+      $("#area").html("");
+      for(var i=0; i< res.area.length;i++){
+        let element = res.area[i];
+        $("#area").append("<option>"+element.Area_Name+"</option>");
+      }
+    })
+    })
+    
+ </script>
         
             </body>
         
