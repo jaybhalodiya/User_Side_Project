@@ -149,7 +149,7 @@ router.post('/ContactUs', isLoggedIn, function(req, res, next) {
         })
 })
 
-router.post('/CustomOrder', isLoggedIn, function(req, res, next) {
+router.post('/CustomOrder', isLoggedIn, upload.any(),  function(req, res, next) {
     const pro = new Custom({
         id: 0,
         UserName: req.body.UserName,
