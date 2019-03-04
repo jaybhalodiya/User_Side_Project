@@ -14,6 +14,7 @@ var Typwrk = require('../models/TypesOfWork.models.js')
 var Siz = require('../models/Size.models.js')
 var cty = require('../models/City.models.js')
 var Ara = require('../models/Area.models.js')
+var Fed = require('../models/Feedback.models.js')
 var multer = require('multer')
 var storage = multer.diskStorage({
     destination: './public/images/upload',
@@ -60,6 +61,36 @@ router.get('/ShippingAddress', function(req, res, next) {
 router.get('/ShippingMethod', function(req, res, next) {
     res.render('ShippingMethod')
 })
+
+router.get('/Feedback', isLoggedIn, function(req, res, next) {
+    res.render('Feedback')
+})
+
+
+
+router.post('/Feedback', function(req, res, next) {
+
+    const st = new Fed({
+        id: 0,
+        UserName: req.body.UserName,
+        EmailID: req.body.EmailID,
+        Date: req.body.Date,
+        Message: req.body.Message
+
+
+
+    });
+    st.save().then(() => {
+        console.log("insert success");
+        res.redirect('/Home');
+
+    }).catch(() => {
+        console.log("error");
+    });
+});
+
+
+
 
 /* GET About Us  page. */
 router.get('/AboutUs', function(req, res, next) {
@@ -149,7 +180,7 @@ router.post('/ContactUs', isLoggedIn, function(req, res, next) {
         })
 })
 
-router.post('/CustomOrder', isLoggedIn, upload.any(),  function(req, res, next) {
+router.post('/CustomOrder', isLoggedIn, upload.any(), function(req, res, next) {
     const pro = new Custom({
         id: 0,
         UserName: req.body.UserName,
