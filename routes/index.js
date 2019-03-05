@@ -16,6 +16,8 @@ var cty = require('../models/City.models.js')
 var Ara = require('../models/Area.models.js')
 var Fed = require('../models/Feedback.models.js')
 var multer = require('multer')
+var Sals = require('../models/Sales.models.js')
+
 var storage = multer.diskStorage({
     destination: './public/images/upload',
     filename: function(req, file, callback) {
@@ -44,8 +46,30 @@ router.get('/LoginReg', function(req, res, next) {
 
 /* GET CheckOut start  page. */
 router.get('/CheckoutStart', function(req, res, next) {
-    res.render('CheckoutStart')
+    AddTo.find({
+        user_id: req.session.passport.user
+    }, function(err, data) {
+        console.log(data)
+        let total = 0;
+        for (let index = 0; index < data.length; index++) {
+            const element = data[index];
+            total = total + element.Price;
+
+
+        }
+        res.render('CheckoutStart', {
+            total: total
+        })
+    })
 })
+
+
+
+
+
+
+
+
 
 /* GET Checkout Started  page. */
 router.get('/CheckoutStarted', function(req, res, next) {
@@ -358,9 +382,15 @@ router.get('/DeLehengaCholi', function(req, res, next) {
             Category_Name: 'Lehenga Choli(Designer LehengaCholi)'
         },
         function(err, data) {
-            console.log(data)
-            res.render('DeLehengaCholi', {
-                DeLehengaCholi: data
+            Prod.find({
+                Category_Name: 'Lehenga Choli(Designer LehengaCholi)'
+            }).count(function(err, lehengacount) {
+                console.log('---', lehengacount)
+                console.log(data)
+                res.render('DeLehengaCholi', {
+                    DeLehengaCholi: data,
+                    lehengacount: lehengacount
+                })
             })
         }
     )
@@ -372,8 +402,16 @@ router.get('/BridalLehengaCholi', function(req, res, next) {
         },
         function(err, data) {
             console.log(data)
-            res.render('BridalLehengaCholi', {
-                BridalLehengaCholi: data
+            Prod.find({
+                Category_Name: 'Lehenga Choli(Bridal Lehenga Choli)'
+            }).count(function(err, bridalcount) {
+                console.log('--', bridalcount)
+
+                res.render('BridalLehengaCholi', {
+                    BridalLehengaCholi: data,
+                    bridalcount: bridalcount
+
+                })
             })
         }
     )
