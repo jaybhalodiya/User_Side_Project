@@ -1,5 +1,10 @@
 <% include partials/header %>
 
+<style>
+
+</style>
+
+
 	<!-- Content section -->	
     <section class="main">
 			
@@ -20,7 +25,24 @@
                         <form enctype="multipart/form-data" action="http://alpha.laboutiquetheme.com/checkout-start.html" method="post" >
                             
                             <div class="box-header">
-                                <h3>Shopping cart</h3>
+                                <h3>Shopping cart</h3> 
+                                
+
+
+
+
+
+
+
+
+                             
+
+
+
+
+
+
+
                                
                             </div>
     
@@ -88,7 +110,34 @@
                                     <i class="fa fa-chevron-left"></i> &nbsp; Continue shopping
                                 </a>			
                                 <div class="pull-right">
-                                   
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+
+
+                                <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">Modal Header</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                      <p>Some text in the modal.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+
+
+
+
+
                                  
                                     <a href="CheckoutStart" button type="submit" name="checkout" value="1" class="btn btn-primary btn-sm">
                                         Proceed to checkout &nbsp; <i class="fa fa-chevron-right"></i>
@@ -454,6 +503,25 @@
 <script src="/javascripts/js/tfingi-megamenu/tfingi-megamenu-frontend.js"></script>
 
 
+<script>
+$(function() {
+  
+  // contact form animations
+  $('#contact').click(function() {
+    $('#contactForm').fadeToggle();
+  })
+  $(document).mouseup(function (e) {
+    var container = $("#contactForm");
+
+    if (!container.is(e.target) // if the target of the click isn't the container...
+        && container.has(e.target).length === 0) // ... nor a descendant of the container
+    {
+        container.fadeOut();
+    }
+  });
+  
+});
+</script>
 
 <!-- END JAVASCRIPTS -->
 
