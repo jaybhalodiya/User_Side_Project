@@ -76,6 +76,11 @@ router.get('/CheckoutStarted', function(req, res, next) {
     res.render('CheckoutStarted')
 })
 
+router.get('/ViewOrder',isLoggedIn, function(req, res, next) {
+    res.render('ViewOrder')
+})
+
+
 /* GET Shipping Address  page. */
 router.get('/ShippingAddress', function(req, res, next) {
     res.render('ShippingAddress')
