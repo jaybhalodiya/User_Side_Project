@@ -58,14 +58,14 @@ router.get('/CheckoutStart', function(req, res, next) {
 
         }
         res.render('CheckoutStart', {
+
             total: total
         })
     })
 })
 
 
-
-
+//------------------------
 
 
 
