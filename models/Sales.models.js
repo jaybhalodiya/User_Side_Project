@@ -5,14 +5,16 @@ const Sals = mongoose.Schema({
     Product: String,
     QTY: Number,
     Price: Number,
-    Total: Number,
+    total: Number,
     first_name: String,
-    LastName: String,
-    Email: String,
-    Phone: Number,
-    Streetaddress: String,
-    City: String,
-    Country: String
+    last_name: String,
+    email: String,
+    phone: Number,
+    street_address: String,
+    city: String,
+    zip: Number,
+    country: String,
+    state: String
 
 
 }, {

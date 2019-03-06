@@ -79,7 +79,9 @@ router.get('/CheckoutStarted', function(req, res, next) {
 
 
 router.get('/ViewOrder', isLoggedIn, function(req, res, next) {
-    Custom.find({}, function(err, data) {
+    Custom.find({
+        user_id: req.session.passport.user
+    }, function(err, data) {
         console.log(data);
         res.render('ViewOrder', {
             ViewOrder: data
@@ -583,25 +585,33 @@ router.post('/ShowFullDetails/:id', function(req, res) {
 // router.post('/carts')
 // controller
 router.post('/ship', function(req, res) {
-    console.log("88888888888888888888888888888888888")
+    console.log("---")
     let insertArray = [];
     AddTo.find({
         user_id: req.session.passport.user
     }, function(err, data) {
         data.forEach(function(element) {
-            console.log("888888888888888888888888")
+            console.log("-----")
             insertArray.push({
                 Product: element.Product_Name,
                 QTY: element.QTY,
                 Price: element.Price,
-                Total: element.Total,
-                first_name: req.body.first_name
+                total: element.total,
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                email: req.body.email,
+                phone: req.body.phone,
+                street_address: req.body.street_address,
+                city: req.body.city,
+                zip: req.body.zip,
+                country: req.body.country,
+                state: req.body.state
 
             });
         });
         Sals.collection.insertMany(insertArray, function(err, data) {
 
-            console.log("888888888888888888888888888888")
+            console.log("-----")
             AddTo.deleteMany({
                 user_id: req.session.passport.user
             }, function(err, result) {
@@ -622,7 +632,8 @@ router.post('/Cart', function(req, res, next) {
             QTY: 1,
             Price: data.Price,
             Image: data.Image,
-            user_id: req.session.passport.user
+            user_id: req.session.passport.user,
+            total: req.body.total
 
         })
         st.save()

@@ -6,7 +6,8 @@ const AddTo = mongoose.Schema({
     QTY: Number,
     Price: Number,
     Image: String,
-    user_id: String
+    user_id: String,
+    total: Number
 }, {
     timespace: true,
 });
