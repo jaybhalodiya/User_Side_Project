@@ -11,7 +11,8 @@ const Custom = mongoose.Schema({
     Work_Name: String,
     Size: String,
     City_Name: String,
-    Area_Name: String
+    Area_Name: String,
+    status: String
 
 }, {
     timespace: true,

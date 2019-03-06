@@ -230,7 +230,9 @@ router.post('/CustomOrder', isLoggedIn, upload.any(), function(req, res, next) {
         Work_Name: req.body.Work_Name,
         Size: req.body.Size,
         City_Name: req.body.City_Name,
-        Area_Name: req.body.Area_Name
+        Area_Name: req.body.Area_Name,
+        status: "Pendding"
+
     })
     pro
         .save()
@@ -576,6 +578,40 @@ router.post('/ShowFullDetails/:id', function(req, res) {
     })
 })
 
+
+
+// router.post('/carts')
+// controller
+router.post('/ship', function(req, res) {
+    console.log("88888888888888888888888888888888888")
+    let insertArray = [];
+    AddTo.find({
+        user_id: req.session.passport.user
+    }, function(err, data) {
+        data.forEach(function(element) {
+            console.log("888888888888888888888888")
+            insertArray.push({
+                Product: element.Product_Name,
+                QTY: element.QTY,
+                Price: element.Price,
+                Total: element.Total,
+                first_name: req.body.first_name
+
+            });
+        });
+        Sals.collection.insertMany(insertArray, function(err, data) {
+
+            console.log("888888888888888888888888888888")
+            AddTo.deleteMany({
+                user_id: req.session.passport.user
+            }, function(err, result) {
+                res.redirect('/ViewOrder')
+            })
+        });
+    })
+})
+
+
 router.post('/Cart', function(req, res, next) {
     console.log('-------', req.session)
     let product = Prod.findById(req.body.id, function(err, data) {
@@ -598,11 +634,6 @@ router.post('/Cart', function(req, res, next) {
                 console.log('error')
             })
     })
-
-
-
-
-
 })
 
 router.get('/deletesCart/:id', function(req, res) {

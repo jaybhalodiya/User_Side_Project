@@ -1,13 +1,9 @@
 <% include partials/header %>
-
 <br />
 <br />
 <br />
-
 <br />
-
 <h3><center>Order</center></h3>
-
 <table class="table">
 <thead>
 <tr>
@@ -17,45 +13,32 @@
     <th scope="col">Phone</th>
     <th scope="col">Message</th>
     <th scope="col">Image</th>
-
     <th scope="col"></th>
-
     <th scope="col">Work_Name</th>
     <th scope="col">Size</th>
     <th scope="col">City_Name</th>
     <th scope="col">Area_Name</th>
     <th scope="col">Status</th>
-
 </tr>
 </thead>
 <tbody>
 <% ViewOrder.forEach(function(demo){%>
-    <tr>
-        
+    <tr> 
         <td><%= demo.UserName%></td>
         <td><%= demo.Measurements%></td>
         <td><%= demo.EmailID%></td>
         <td><%= demo.Phone%></td>
         <td><%= demo.Message%></td>
-        <td>
-        <img src="http://localhost:3001/images/upload/<%= demo.Image %>" height="70" width="70" alt="Smiley face" / > 
-    <td>
-      <td><%= demo.Work_Name %></td>
-      <td><%=demo.Size %></td>
+        <td><img src="http://localhost:3001/images/upload/<%= demo.Image %>" height="70" width="70" alt="Smiley face" /> <td>
+        <td><%= demo.Work_Name %></td>
+        <td><%=demo.Size %></td>
         <td><%=demo.City_Name%></td>
         <td><%=demo.Area_Name%></td>
-        <td>pandding</td>
-
-
-
+        <td><%=demo.status%></td>
     </tr>
     <%})%>
 </tbody>
-
 </table>
-
-
-
 <br/>
 <br />
 
