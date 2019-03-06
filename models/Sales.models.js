@@ -6,7 +6,7 @@ const Sals = mongoose.Schema({
     QTY: Number,
     Price: Number,
     Total: Number,
-    FirstName: String,
+    first_name: String,
     LastName: String,
     Email: String,
     Phone: Number,

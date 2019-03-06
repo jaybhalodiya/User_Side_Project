@@ -294,8 +294,14 @@ router.get('/ComboWear', function(req, res, next) {
         },
         function(err, data) {
             console.log(data)
-            res.render('ComboWear', {
-                ComboWear: data
+            Prod.find({
+                Category_Name: 'Combo Wear'
+            }).count(function(err, comcout) {
+                console.log('--', comcout)
+                res.render('ComboWear', {
+                    ComboWear: data,
+                    comcout: comcout
+                })
             })
         }
     )
@@ -370,8 +376,15 @@ router.get('/PalazzoKurti', function(req, res, next) {
         },
         function(err, data) {
             console.log(data)
-            res.render('PalazzoKurti', {
-                PalazzoKurti: data
+            Prod.find({
+                Category_Name: 'Kurti(Palazzo Kurti)'
+            }).count(function(err, kurpazcount) {
+                console.log('--', kurpazcount)
+
+                res.render('PalazzoKurti', {
+                    PalazzoKurti: data,
+                    kurpazcount: kurpazcount
+                })
             })
         }
     )
@@ -384,8 +397,15 @@ router.get('/KidsWear', function(req, res, next) {
         },
         function(err, data) {
             console.log(data)
-            res.render('KidsWear', {
-                KidsWear: data
+            Prod.find({
+                Category_Name: 'Kids Wear'
+            }).count(function(err, kidscount) {
+                console.log('---', kidscount)
+
+                res.render('KidsWear', {
+                    KidsWear: data,
+                    kidscount: kidscount
+                })
             })
         }
     )
@@ -437,8 +457,14 @@ router.get('/Gown', function(req, res, next) {
         },
         function(err, data) {
             console.log(data)
-            res.render('Gown', {
-                Gown: data
+            Prod.find({
+                Category_Name: 'Gown'
+            }).count(function(err, gowncout) {
+                console.log('--', gowncout)
+                res.render('Gown', {
+                    Gown: data,
+                    gowncout: gowncout
+                })
             })
         }
     )
@@ -450,8 +476,14 @@ router.get('/DesignerKurti', function(req, res, next) {
         },
         function(err, data) {
             console.log(data)
-            res.render('DesignerKurti', {
-                DesignerKurti: data
+            Prod.find({
+                Category_Name: 'Kurti(Designer Kurti)'
+            }).count(function(err, kruticount) {
+                console.log('------', kruticount)
+                res.render('DesignerKurti', {
+                    DesignerKurti: data,
+                    kruticount: kruticount
+                })
             })
         }
     )
@@ -463,8 +495,16 @@ router.get('/ChexChaniyaCholi', function(req, res, next) {
         },
         function(err, data) {
             console.log(data)
-            res.render('ChexChaniyaCholi', {
-                ChexChaniyaCholi: data
+            Prod.find({
+                Category_Name: 'Chex Print Chaniya Choli'
+            }).count(function(err, chexcount) {
+                console.log('--', chexcount)
+
+
+                res.render('ChexChaniyaCholi', {
+                    ChexChaniyaCholi: data,
+                    chexcount: chexcount
+                })
             })
         }
     )
@@ -547,6 +587,7 @@ router.post('/Cart', function(req, res, next) {
             Price: data.Price,
             Image: data.Image,
             user_id: req.session.passport.user
+
         })
         st.save()
             .then(() => {
@@ -557,6 +598,11 @@ router.post('/Cart', function(req, res, next) {
                 console.log('error')
             })
     })
+
+
+
+
+
 })
 
 router.get('/deletesCart/:id', function(req, res) {
