@@ -39,6 +39,69 @@
     <%})%>
 </tbody>
 </table>
+
+<hr width="300">
+
+<br />
+<br />
+
+<table class="table">
+<thead>
+<tr>
+<th scope="col">Product</th>
+<th scope="col">QTY</th>
+<th scope="col">Price</th>
+
+<th scope="col">first_name</th>
+<th scope="col">last_name</th>
+<th scope="col">email</th>
+<th scope="col">phone</th>
+<th scope="col">street_address</th>
+<th scope="col">city</th>
+<th scope="col">zip</th>
+<th scope="col">country</th>
+<th scope="col">state</th>
+<th scope="col">Status</th>
+
+</tr>
+</thead>
+<tbody>
+<% sla.forEach(function(demo){%>
+    <tr> 
+      
+<td> <%= demo.Product %></td>
+<td> <%= demo.QTY %></td>
+<td> <%= demo.Price %></td>
+<td> <%= demo.first_name %></td>
+<td> <%= demo.last_name %></td>
+<td> <%= demo.email %></td>
+<td> <%= demo.phone %></td>
+<td> <%= demo.street_address %></td>
+<td> <%= demo.city %></td>
+<td> <%= demo.zip %></td>
+<td> <%= demo.country %></td>
+<td> <%= demo.state %></td>
+<td><%=demo.status%></td>
+
+    </tr>
+    <%})%>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <br/>
 <br />
 

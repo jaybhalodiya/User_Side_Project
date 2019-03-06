@@ -14,7 +14,8 @@ const Sals = mongoose.Schema({
     city: String,
     zip: Number,
     country: String,
-    state: String
+    state: String,
+    status: String
 
 
 }, {

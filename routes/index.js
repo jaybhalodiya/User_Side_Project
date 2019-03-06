@@ -77,17 +77,46 @@ router.get('/CheckoutStarted', function(req, res, next) {
 })
 
 
+//----------------------
+// router.get('/ViewOrder', isLoggedIn, function(req, res, next) {
+//     Custom.find({
+//         user_id: req.session.passport.user
+//     }, function(err, data) {
+
+//         console.log(data);
+//         res.render('ViewOrder', {
+//             ViewOrder: data
+//         });
+//     });
+// });
+
+
+
+
 
 router.get('/ViewOrder', isLoggedIn, function(req, res, next) {
     Custom.find({
         user_id: req.session.passport.user
     }, function(err, data) {
-        console.log(data);
-        res.render('ViewOrder', {
-            ViewOrder: data
-        });
+        if (err) {
+            console.log(err);
+        } else {
+            Sals.find(function(err, sla) {
+                if (err) {
+                    console.log(err);
+                } else {
+
+                    res.render('ViewOrder', {
+                        ViewOrder: data,
+                        sla: sla
+                    });
+                    console.log(data);
+                }
+            });
+        }
     });
 });
+
 
 
 
@@ -605,7 +634,8 @@ router.post('/ship', function(req, res) {
                 city: req.body.city,
                 zip: req.body.zip,
                 country: req.body.country,
-                state: req.body.state
+                state: req.body.state,
+                status: "Pendding"
 
             });
         });
