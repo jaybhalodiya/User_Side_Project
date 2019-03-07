@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const Custom = mongoose.Schema({
-
+    user_id: String,
     UserName: String,
     Measurements: String,
     EmailID: String,

@@ -7,34 +7,40 @@
 <table class="table">
 <thead>
 <tr>
-    <th scope="col">UserName</th>
-    <th scope="col">Measurements</th>
-    <th scope="col">EmailID</th>
-    <th scope="col">Phone</th>
-    <th scope="col">Message</th>
-    <th scope="col">Image</th>
-    <th scope="col"></th>
-    <th scope="col">Work_Name</th>
-    <th scope="col">Size</th>
-    <th scope="col">City_Name</th>
-    <th scope="col">Area_Name</th>
-    <th scope="col">Status</th>
+<th scope="col">Product</th>
+<th scope="col">QTY</th>
+<th scope="col">Price</th>
+<th scope="col">Image</th>
+<th scope="col">first_name</th>
+<th scope="col">last_name</th>
+<th scope="col">email</th>
+<th scope="col">phone</th>
+<th scope="col">street_address</th>
+<th scope="col">city</th>
+<th scope="col">zip</th>
+<th scope="col">country</th>
+<th scope="col">state</th>
+<th scope="col">Action</th>
 </tr>
 </thead>
 <tbody>
 <% ViewOrder.forEach(function(demo){%>
     <tr> 
-        <td><%= demo.UserName%></td>
-        <td><%= demo.Measurements%></td>
-        <td><%= demo.EmailID%></td>
-        <td><%= demo.Phone%></td>
-        <td><%= demo.Message%></td>
-        <td><img src="http://localhost:3001/images/upload/<%= demo.Image %>" height="70" width="70" alt="Smiley face" /> <td>
-        <td><%= demo.Work_Name %></td>
-        <td><%=demo.Size %></td>
-        <td><%=demo.City_Name%></td>
-        <td><%=demo.Area_Name%></td>
-        <td><%=demo.status%></td>
+    <td> <%= demo.Product %></td>
+    <td> <%= demo.QTY %></td>
+    <td> <%= demo.Price %></td>
+    <td>
+    <img src="http://localhost:3000/images/upload/<%= demo.Image %>" height="42" width="42"> </td>
+    <td> <%= demo.first_name %></td>
+    <td> <%= demo.last_name %></td>
+    <td> <%= demo.email %></td>
+    <td> <%= demo.phone %></td>
+    <td> <%= demo.street_address %></td>
+    <td> <%= demo.city %></td>
+    <td> <%= demo.zip %></td>
+    <td> <%= demo.country %></td>
+    <td> <%= demo.state %></td>
+    <td><%= demo.status%></td>
     </tr>
     <%})%>
 </tbody>
@@ -45,48 +51,80 @@
 <br />
 <br />
 
-<table class="table">
+
+
+
+
+
+
+
+
+
+
+<table class="table table-bordered" id="myTable">
 <thead>
 <tr>
-<th scope="col">Product</th>
-<th scope="col">QTY</th>
-<th scope="col">Price</th>
+    <th scope="col">User Name</th>
+    <th scope="col">Measurements</th>
+    <th scope="col">Email ID</th>
+    <th scope="col"> Phone </th>
+    <th scope="col">Message</th>
+    <th scope="col">Image</th>
+    <th scope="col">Work Name</th>
+    <th scope="col">Size</th>
+    <th scope="col">City Name</th>
+    <th scope="col">Area Name</th>
+  
+    
+    <th scope="col">Action</th>
 
-<th scope="col">first_name</th>
-<th scope="col">last_name</th>
-<th scope="col">email</th>
-<th scope="col">phone</th>
-<th scope="col">street_address</th>
-<th scope="col">city</th>
-<th scope="col">zip</th>
-<th scope="col">country</th>
-<th scope="col">state</th>
-<th scope="col">Status</th>
-
+   
+    
 </tr>
 </thead>
 <tbody>
-<% sla.forEach(function(demo){%>
-    <tr> 
-      
-<td> <%= demo.Product %></td>
-<td> <%= demo.QTY %></td>
-<td> <%= demo.Price %></td>
-<td> <%= demo.first_name %></td>
-<td> <%= demo.last_name %></td>
-<td> <%= demo.email %></td>
-<td> <%= demo.phone %></td>
-<td> <%= demo.street_address %></td>
-<td> <%= demo.city %></td>
-<td> <%= demo.zip %></td>
-<td> <%= demo.country %></td>
-<td> <%= demo.state %></td>
+    <% cust.forEach(function(demo){%>
+    <tr>
+    <td> <%= demo.UserName %></td>
+    <td> <%= demo.Measurements %></td>
+    <td> <%= demo.EmailID %></td>
+    <td> <%= demo.Phone %></td>
+    <td> <%= demo.Message %></td>
+    <td> <img src="http://localhost:3000/images/upload/<%= demo.Image %>" height="70" width="70" alt="Smiley face" / > 
+</td>
+<td> <%= demo.Work_Name %></td>
+<td><%= demo.Size %> </td>
+<td><%= demo.City_Name %> </td>
+<td><%= demo.Area_Name %> </td>
 <td><%=demo.status%></td>
 
+
+
+
+
+
     </tr>
-    <%})%>
+    <%}) %>
 </tbody>
+
 </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

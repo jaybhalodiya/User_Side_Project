@@ -47,77 +47,58 @@ router.get('/LoginReg', function(req, res, next) {
 /* GET CheckOut start  page. */
 router.get('/CheckoutStart', function(req, res, next) {
     AddTo.find({
-        user_id: req.session.passport.user
-    }, function(err, data) {
-        console.log(data)
-        let total = 0;
-        for (let index = 0; index < data.length; index++) {
-            const element = data[index];
-            total = total + element.Price;
-
-
+            user_id: req.session.passport.user
+        },
+        function(err, data) {
+            console.log(data)
+            let total = 0
+            for (let index = 0; index < data.length; index++) {
+                const element = data[index]
+                total = total + element.Price
+            }
+            res.render('CheckoutStart', {
+                total: total
+            })
         }
-        res.render('CheckoutStart', {
-
-            total: total
-        })
-    })
+    )
 })
 
-
-//------------------------
-
-
-
-
+// ------------------------
 
 /* GET Checkout Started  page. */
 router.get('/CheckoutStarted', function(req, res, next) {
     res.render('CheckoutStarted')
 })
 
-
-//----------------------
-// router.get('/ViewOrder', isLoggedIn, function(req, res, next) {
-//     Custom.find({
-//         user_id: req.session.passport.user
-//     }, function(err, data) {
-
-//         console.log(data);
-//         res.render('ViewOrder', {
-//             ViewOrder: data
-//         });
-//     });
-// });
-
-
-
-
-
+// ----------------------
 router.get('/ViewOrder', isLoggedIn, function(req, res, next) {
-    Custom.find({
-        user_id: req.session.passport.user
-    }, function(err, data) {
-        if (err) {
-            console.log(err);
-        } else {
-            Sals.find(function(err, sla) {
-                if (err) {
-                    console.log(err);
-                } else {
+    console.log('------8888888888', req.session.passport)
+        // Sals.find({
+        //     user_id: req.session.passport.user
 
-                    res.render('ViewOrder', {
-                        ViewOrder: data,
-                        sla: sla
-                    });
-                    console.log(data);
-                }
-            });
-        }
-    });
+    // }, function(err, data) {
+    //     console.log("888888888888888888888888888888")
+    //     if (err) {
+    //         console.log(err)
+    //     } else {
+    //         Custom.find({
+    //             user_id: req.session.passport.user
+    //         }, function(err, cust) {
+    //             if (err) {
+    //                 console.log(err)
+    //             } else {
+
+
+    //                 res.render('ViewOrder', {
+    //                     ViewOrder: data,
+    //                     cust: cust
+    //                 });
+    //                 console.log(data);
+    //             }
+    //         });
+    //     }
+    // });
 });
-
-
 
 
 
@@ -135,31 +116,23 @@ router.get('/Feedback', isLoggedIn, function(req, res, next) {
     res.render('Feedback')
 })
 
-
-
 router.post('/Feedback', function(req, res, next) {
-
     const st = new Fed({
         id: 0,
         UserName: req.body.UserName,
         EmailID: req.body.EmailID,
         Date: req.body.Date,
         Message: req.body.Message
-
-
-
-    });
-    st.save().then(() => {
-        console.log("insert success");
-        res.redirect('/Home');
-
-    }).catch(() => {
-        console.log("error");
-    });
-});
-
-
-
+    })
+    st.save()
+        .then(() => {
+            console.log('insert success')
+            res.redirect('/Home')
+        })
+        .catch(() => {
+            console.log('error')
+        })
+})
 
 /* GET About Us  page. */
 router.get('/AboutUs', function(req, res, next) {
@@ -171,18 +144,17 @@ router.get('/Product', function(req, res, next) {
     res.render('Product')
 })
 
-
 router.get('/getarea', function(req, res, next) {
     Ara.find({
-        City_Name: req.query.city_name
-    }, function(err, data) {
-        res.json({
-            area: data
-        })
-    })
-});
-
-
+            City_Name: req.query.city_name
+        },
+        function(err, data) {
+            res.json({
+                area: data
+            })
+        }
+    )
+})
 
 /* GET Customize Order  page. */
 router.get('/CustomOrder', isLoggedIn, function(req, res, next) {
@@ -192,34 +164,29 @@ router.get('/CustomOrder', isLoggedIn, function(req, res, next) {
         } else {
             Siz.find(function(err, anuser) {
                 if (err) {
-                    console.log(err);
+                    console.log(err)
                 } else {
                     cty.find(function(err, cuser) {
                         if (err) {
-                            console.log(err);
+                            console.log(err)
                         } else {
                             Ara.find(function(err, auser) {
                                 if (err) {
-                                    console.log(err);
+                                    console.log(err)
                                 } else {
-
-
-
                                     res.render('CustomOrder', {
                                         users: users,
                                         anuser: anuser,
                                         cuser: cuser,
                                         auser: auser
-
                                     })
-                                    console.log(users);
+                                    console.log(users)
                                 }
                             })
-
                         }
                     })
                 }
-            });
+            })
         }
     })
 })
@@ -262,8 +229,7 @@ router.post('/CustomOrder', isLoggedIn, upload.any(), function(req, res, next) {
         Size: req.body.Size,
         City_Name: req.body.City_Name,
         Area_Name: req.body.Area_Name,
-        status: "Pendding"
-
+        status: 'Pendding'
     })
     pro
         .save()
@@ -348,10 +314,10 @@ router.get('/Cart', isLoggedIn, function(req, res, next) {
         },
         function(err, data) {
             console.log(data)
-            let total = 0;
+            let total = 0
             for (let index = 0; index < data.length; index++) {
-                const element = data[index];
-                total = total + element.Price;
+                const element = data[index]
+                total = total + element.Price
             }
             res.render('Cart', {
                 Cart: data,
@@ -477,7 +443,6 @@ router.get('/BridalLehengaCholi', function(req, res, next) {
                 res.render('BridalLehengaCholi', {
                     BridalLehengaCholi: data,
                     bridalcount: bridalcount
-
                 })
             })
         }
@@ -532,7 +497,6 @@ router.get('/ChexChaniyaCholi', function(req, res, next) {
                 Category_Name: 'Chex Print Chaniya Choli'
             }).count(function(err, chexcount) {
                 console.log('--', chexcount)
-
 
                 res.render('ChexChaniyaCholi', {
                     ChexChaniyaCholi: data,
@@ -609,48 +573,48 @@ router.post('/ShowFullDetails/:id', function(req, res) {
     })
 })
 
-
-
 // router.post('/carts')
 // controller
 router.post('/ship', function(req, res) {
-    console.log("---")
-    let insertArray = [];
+    console.log('---')
+    let insertArray = []
     AddTo.find({
-        user_id: req.session.passport.user
-    }, function(err, data) {
-        data.forEach(function(element) {
-            console.log("-----")
-            insertArray.push({
-                Product: element.Product_Name,
-                QTY: element.QTY,
-                Price: element.Price,
-                total: element.total,
-                first_name: req.body.first_name,
-                last_name: req.body.last_name,
-                email: req.body.email,
-                phone: req.body.phone,
-                street_address: req.body.street_address,
-                city: req.body.city,
-                zip: req.body.zip,
-                country: req.body.country,
-                state: req.body.state,
-                status: "Pendding"
-
-            });
-        });
-        Sals.collection.insertMany(insertArray, function(err, data) {
-
-            console.log("-----")
-            AddTo.deleteMany({
-                user_id: req.session.passport.user
-            }, function(err, result) {
-                res.redirect('/ViewOrder')
+            user_id: req.session.passport.user
+        },
+        function(err, data) {
+            data.forEach(function(element) {
+                console.log('-----')
+                insertArray.push({
+                    Product: element.Product_Name,
+                    QTY: element.QTY,
+                    Price: element.Price,
+                    Image: element.Image,
+                    total: element.total,
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
+                    email: req.body.email,
+                    phone: req.body.phone,
+                    street_address: req.body.street_address,
+                    city: req.body.city,
+                    zip: req.body.zip,
+                    country: req.body.country,
+                    state: req.body.state,
+                    status: 'Pendding'
+                })
             })
-        });
-    })
+            Sals.collection.insertMany(insertArray, function(err, data) {
+                console.log('-----')
+                AddTo.deleteMany({
+                        user_id: req.session.passport.user
+                    },
+                    function(err, result) {
+                        res.redirect('/ViewOrder')
+                    }
+                )
+            })
+        }
+    )
 })
-
 
 router.post('/Cart', function(req, res, next) {
     console.log('-------', req.session)
@@ -664,7 +628,6 @@ router.post('/Cart', function(req, res, next) {
             Image: data.Image,
             user_id: req.session.passport.user,
             total: req.body.total
-
         })
         st.save()
             .then(() => {
