@@ -17,12 +17,7 @@ const Sals = mongoose.Schema({
     country: String,
     state: String,
     status: String,
-    user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'UserLogin'
-    }
-
-
+    user_id: String
 }, {
     timespace: true,
 });

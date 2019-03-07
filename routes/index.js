@@ -73,31 +73,31 @@ router.get('/CheckoutStarted', function(req, res, next) {
 // ----------------------
 router.get('/ViewOrder', isLoggedIn, function(req, res, next) {
     console.log('------8888888888', req.session.passport)
-        // Sals.find({
-        //     user_id: req.session.passport.user
+    Sals.find({
+        // user_id: req.session.passport.user
 
-    // }, function(err, data) {
-    //     console.log("888888888888888888888888888888")
-    //     if (err) {
-    //         console.log(err)
-    //     } else {
-    //         Custom.find({
-    //             user_id: req.session.passport.user
-    //         }, function(err, cust) {
-    //             if (err) {
-    //                 console.log(err)
-    //             } else {
+    }, function(err, data) {
+        console.log("888888888888888888888888888888")
+        if (err) {
+            console.log(err)
+        } else {
+            Custom.find({
+
+            }, function(err, cust) {
+                if (err) {
+                    console.log(err)
+                } else {
 
 
-    //                 res.render('ViewOrder', {
-    //                     ViewOrder: data,
-    //                     cust: cust
-    //                 });
-    //                 console.log(data);
-    //             }
-    //         });
-    //     }
-    // });
+                    res.render('ViewOrder', {
+                        ViewOrder: data,
+                        cust: cust
+                    });
+                    console.log(data);
+                }
+            });
+        }
+    });
 });
 
 
