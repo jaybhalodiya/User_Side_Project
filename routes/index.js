@@ -74,21 +74,18 @@ router.get('/CheckoutStarted', function(req, res, next) {
 router.get('/ViewOrder', isLoggedIn, function(req, res, next) {
     console.log('------8888888888', req.session.passport)
     Sals.find({
-        // user_id: req.session.passport.user
-
+        "user_id": req.session.passport.user
     }, function(err, data) {
-        console.log("888888888888888888888888888888")
+        console.log("888888888888888888888888888888", data);
         if (err) {
             console.log(err)
         } else {
             Custom.find({
-
+                "user_id": req.session.passport.user
             }, function(err, cust) {
                 if (err) {
                     console.log(err)
                 } else {
-
-
                     res.render('ViewOrder', {
                         ViewOrder: data,
                         cust: cust
@@ -229,6 +226,7 @@ router.post('/CustomOrder', isLoggedIn, upload.any(), function(req, res, next) {
         Size: req.body.Size,
         City_Name: req.body.City_Name,
         Area_Name: req.body.Area_Name,
+        user_id: req.session.passport.user,
         status: 'Pendding'
     })
     pro
@@ -317,7 +315,7 @@ router.get('/Cart', isLoggedIn, function(req, res, next) {
             let total = 0
             for (let index = 0; index < data.length; index++) {
                 const element = data[index]
-                total = total + element.Price
+                total = total + element.total
             }
             res.render('Cart', {
                 Cart: data,
@@ -599,7 +597,8 @@ router.post('/ship', function(req, res) {
                     zip: req.body.zip,
                     country: req.body.country,
                     state: req.body.state,
-                    status: 'Pendding'
+                    status: 'Pendding',
+                    user_id: req.session.passport.user
                 })
             })
             Sals.collection.insertMany(insertArray, function(err, data) {
@@ -620,23 +619,39 @@ router.post('/Cart', function(req, res, next) {
     console.log('-------', req.session)
     let product = Prod.findById(req.body.id, function(err, data) {
         console.log(data)
-        const st = new AddTo({
-            id: 0,
-            Product_Name: data.Product_Name,
-            QTY: 1,
-            Price: data.Price,
-            Image: data.Image,
+        AddTo.find({
             user_id: req.session.passport.user,
-            total: req.body.total
+            product_id: data._id
+        }, function(err, cart) {
+            if (cart.length > 0) {
+                AddTo.findByIdAndUpdate(cart[0]._id, {
+                    QTY: cart[0].QTY + 1,
+                    total: cart[0].Price * (cart[0].QTY + 1)
+                }, function(err, result) {
+                    res.redirect('/Cart');
+                })
+            } else {
+                const st = new AddTo({
+                    id: 0,
+                    Product_Name: data.Product_Name,
+                    QTY: 1,
+                    Price: data.Price,
+                    Image: data.Image,
+                    user_id: req.session.passport.user,
+                    total: data.Price,
+                    product_id: data._id
+                })
+                st.save()
+                    .then(() => {
+                        console.log('insert success')
+                        res.redirect('/Cart')
+                    })
+                    .catch(() => {
+                        console.log('error')
+                    })
+            }
         })
-        st.save()
-            .then(() => {
-                console.log('insert success')
-                res.redirect('/Cart')
-            })
-            .catch(() => {
-                console.log('error')
-            })
+
     })
 })
 

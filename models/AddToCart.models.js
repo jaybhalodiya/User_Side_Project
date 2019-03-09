@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const AddTo = mongoose.Schema({
-
+    product_id: String,
     Product_Name: String,
     QTY: Number,
     Price: Number,
